@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+	<link rel="stylesheet" href="resources/theme/css/index.css"/> 	
+	<link rel="stylesheet" href="resources/theme/css/signup.css"/>
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div class="container">
+		<div class="login">
+			<h1 class="login-heading">
+				<strong>Welcome.</strong> Please Signup.</h1>
+			
+	<form >
+		
+		<input type="text" placeholder="Username" ng-model="kin.name" class="input-txt">
+
+		<input type="text" placeholder="Email id" ng-model="kin.email"class="input-txt">
+
+		<input type="text" placeholder="Phone no" ng-model="kin.phoneno" class="input-txt">
+
+		<input type="text" placeholder="Date of Birth" ng-model="kin.dob" class="input-txt">
+
+		<input type="text" placeholder="Password" ng-model="kin.password" class="input-txt">
+
+		<input type="text" placeholder="Confirm Password" ng-model="kin.confirmpassword" class="input-txt">
+
+		<input type="text" placeholder="Gender" ng-model="kin.gender" class="input-txt">
+
+		<input type="text" placeholder="Post" ng-model="kin.post" class="input-txt">
+
+		<input type="text" placeholder="Role" ng-model="kin.role" class="input-txt">
+
+		<button type="submit" ng-click="save()" style="margin-top:10px;" class="btn btn--right">Sign up</button>
+ 
+	</form>
+	
+		</div>
+	</div>
+
+ <script src="resources/theme/js/index.js"></script>
+
+</body>
+</html>

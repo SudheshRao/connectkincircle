@@ -1,0 +1,7 @@
+sudhesh\serivce\kinServiceImpl.class
+sudhesh\controller\kinController.class
+sudhesh\model\Kin.class
+sudhesh\config\DBConfig.class
+sudhesh\config\WebAppConfig.class
+sudhesh\DAO\kinDAOImpl.class
+sudhesh\config\WebAppInitializer.class
