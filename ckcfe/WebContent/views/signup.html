@@ -13,25 +13,31 @@
 			<h1 class="login-heading">
 				<strong>Welcome.</strong> Please Signup.</h1>
 			
-	<form >
+	<form style="font-weight:bold;">
 		
-		<input type="text" placeholder="Username" ng-model="kin.name" class="input-txt">
+		<input type="text" placeholder="Username" ng-model="kin.name" class="input-txt" pattern=".{4,15}" required>
 
-		<input type="text" placeholder="Email id" ng-model="kin.email"class="input-txt">
+		<input type="text" placeholder="Email id" ng-model="kin.email"class="input-txt" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Please enter a valid email" required>
 
-		<input type="text" placeholder="Phone no" ng-model="kin.phoneno" class="input-txt">
+		<input type="text" placeholder="Phone no" ng-model="kin.phoneno" class="input-txt" pattern="^\d{10}$" title="Please enter a valid number" required>
 
-		<input type="text" placeholder="Date of Birth" ng-model="kin.dob" class="input-txt">
+		<input type="date" placeholder="Date of Birth" ng-model="kin.dob" class="input-txt" required>
 
-		<input type="text" placeholder="Password" ng-model="kin.password" class="input-txt">
+		<input type="password" placeholder="Password" ng-model="kin.password" class="input-txt" pattern=".{8,}" required>
 
-		<input type="text" placeholder="Confirm Password" ng-model="kin.confirmpassword" class="input-txt">
+		<input type="password" placeholder="Confirm Password" ng-model="kin.confirmpassword" class="input-txt" pattern=".{8,}" title="Should match the above password"required>
 
-		<input type="text" placeholder="Gender" ng-model="kin.gender" class="input-txt">
+		<div class="input-txt">Gender:  
+		<input type="radio" name="gender" ng-model="kin.gender" value="Male" required> Male
+		<input type="radio" name="gender" ng-model="kin.gender" value="Female"> Female</div>
 
-		<input type="text" placeholder="Post" ng-model="kin.post" class="input-txt">
-
-		<input type="text" placeholder="Role" ng-model="kin.role" class="input-txt">
+		<div class="input-txt">Role: 
+		<input type="radio" name="role" ng-model="kin.role" value="Employee" required> Employee
+		<input type="radio" name="role" ng-model="kin.role" value="Contractor"> Contractor
+		<input type="radio" name="role" ng-model="kin.role" value="Intern"> Intern
+		<input type="radio" name="role" ng-model="kin.role" value="Student"> Student</div>
+		
+		<input type="text" placeholder="Post" ng-model="kin.post" class="input-txt" required>
 
 		<button type="submit" ng-click="save()" style="margin-top:10px;" class="btn btn--right">Sign up</button>
  

@@ -27,9 +27,8 @@ public class kinDAOImpl {
 	}
 
 	public Kin authenticate(Kin kin) {
-		Session session=sessionFactory.openSession();
+		Session session=sessionFactory.getCurrentSession();
 		Query query=session.createQuery("from Kin where name=?  and password=?");
-		//select * from User where username='smith' and password='123'
 		query.setString(0, kin.getName());
 		query.setString(1, kin.getPassword());
 		Kin validkin=(Kin)query.uniqueResult();
@@ -53,6 +52,15 @@ public class kinDAOImpl {
 		return Kin;		
 	}
 
+	public Kin getKinByName(String name) {
+		Session session=sessionFactory.getCurrentSession();
+		Query query=session.createQuery("from Kin where name=:un");
+		query.setParameter("un", name);
+		Kin validkin=(Kin)query.uniqueResult();
+		session.flush();
+		return validkin;
+	}
+	
 	public Kin getKinById(int id) {
 		Session session=sessionFactory.getCurrentSession();
 		Kin Kin=(Kin)session.get(Kin.class, id);
@@ -76,5 +84,6 @@ public class kinDAOImpl {
 		session.flush();
 		
 	}
+
 
 }

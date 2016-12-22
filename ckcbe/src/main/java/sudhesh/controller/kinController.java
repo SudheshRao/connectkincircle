@@ -25,7 +25,12 @@ public class kinController {
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public ResponseEntity<?> login(@RequestBody Kin kin){
-		System.out.println("im inn");
+		System.out.println("ho ho");
+
+	Kin checkkin=kindao.getKinByName(kin.getName());
+	System.out.println("ho ho");
+	if(checkkin.isStatus()==true)
+	{		System.out.println("ho ho");
 
 	Kin validKin=kindao.authenticate(kin);
 	System.out.println("im inn");
@@ -37,6 +42,10 @@ public class kinController {
 		validKin.setIsonline(true);
 		kindao.updateKin(validKin); // to update online status in db
 		return new ResponseEntity<Kin>(validKin,HttpStatus.OK);//200
+	}}
+	else{
+		Errore error=new Errore(3,"you are still not authorized....");
+		return new ResponseEntity<Errore>(error,HttpStatus.UNAUTHORIZED); 
 	}
 	}
 	
