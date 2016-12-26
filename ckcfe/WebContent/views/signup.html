@@ -2,50 +2,105 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-	<link rel="stylesheet" href="resources/theme/css/index.css"/> 	
-	<link rel="stylesheet" href="resources/theme/css/signup.css"/>
+	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
+	<script src="resources/materialize/js/materialize.min.js"/></script>
+<style>
+body{
+  background: url(resources/images/homewall.jpg) no-repeat;
+  background-size:cover;
+  }
+      /* label color */
+   .input-field label {
+     color: #000;
+   }
+   /* label focus color */
+   .input-field input[type=text]:focus + label {
+     color: #000;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:focus {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+   .input-field input[type=password]:focus + label {
+     color: #000;
+   }
+   /* label underline focus color */
+   .input-field input[type=password]:focus {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+
+  
+</style>
+
 <title>Insert title here</title>
 </head>
 <body>
 
 	<div class="container">
-		<div class="login">
-			<h1 class="login-heading">
-				<strong>Welcome.</strong> Please Signup.</h1>
+		<h1 class="center-align">
+      <strong>Welcome.</strong> Please Signup.</h1>
 			
-	<form style="font-weight:bold;">
-		
-		<input type="text" placeholder="Username" ng-model="kin.name" class="input-txt" pattern=".{4,15}" required>
-
-		<input type="text" placeholder="Email id" ng-model="kin.email"class="input-txt" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Please enter a valid email" required>
-
-		<input type="text" placeholder="Phone no" ng-model="kin.phoneno" class="input-txt" pattern="^\d{10}$" title="Please enter a valid number" required>
-
-		<input type="date" placeholder="Date of Birth" ng-model="kin.dob" class="input-txt" required>
-
-		<input type="password" placeholder="Password" ng-model="kin.password" class="input-txt" pattern=".{8,}" required>
-
-		<input type="password" placeholder="Confirm Password" ng-model="kin.confirmpassword" class="input-txt" pattern=".{8,}" title="Should match the above password"required>
-
-		<div class="input-txt">Gender:  
-		<input type="radio" name="gender" ng-model="kin.gender" value="Male" required> Male
-		<input type="radio" name="gender" ng-model="kin.gender" value="Female"> Female</div>
-
-		<div class="input-txt">Role: 
-		<input type="radio" name="role" ng-model="kin.role" value="Employee" required> Employee
-		<input type="radio" name="role" ng-model="kin.role" value="Contractor"> Contractor
-		<input type="radio" name="role" ng-model="kin.role" value="Intern"> Intern
-		<input type="radio" name="role" ng-model="kin.role" value="Student"> Student</div>
-		
-		<input type="text" placeholder="Post" ng-model="kin.post" class="input-txt" required>
-
-		<button type="submit" ng-click="save()" style="margin-top:10px;" class="btn btn--right">Sign up</button>
- 
-	</form>
+	<form class="container">
 	
+		<div class="row">
+        <div class="input-field col s6 ">
+          <input id="icon_prefix" type="text" class="validate" ng-model="kin.name"   pattern=".{4,15}" required="required">
+          <label for="icon_prefix">Name</label>
+        </div>
+        <div class="input-field col s6 ">
+          <input id="icon_prefix" type="text" class="validate" ng-model="kin.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Please enter a valid email" required>
+          <label for="icon_prefix">E-mail</label>
+        </div>
+        <div class="input-field col s6 ">
+		  <input id="icon_prefix" type="text" class="validate" ng-model="kin.phoneno" pattern="^\d{10}$" title="Please enter a valid number" required>
+          <label for="icon_prefix">Phone No.</label>
+        </div>
+        <div class="input-field col s6 ">
+		  <input id="icon_prefix" type="date" ng-model="kin.dob" >
+          <label for="icon_prefix"></label>
+        </div>
+         <div class="input-field col s6 ">
+		  <input id="icon_prefix" type="password" class="validate" ng-model="kin.password" pattern=".{8,}"  required>
+          <label for="icon_prefix">Password</label>
+        </div>
+        <div class="input-field col s6 ">
+		  <input id="icon_prefix" type="password" class="validate" ng-model="kin.confirmpassword" pattern=".{8,}" title="Should match the above password" required>
+          <label for="icon_prefix">Confirm Password</label>
+        </div>
+        <div class="input-field col s6">
+		  <input id="icon_prefix" type="password" class="validate" ng-model="kin.post" required>
+          <label for="icon_prefix">Post</label>
+        </div>
+        <div class="col s12"><label style="font-size:15px;color:black">Gender:</label> 
+		<input type="radio" name="gender" ng-model="kin.gender" value="Male"  id="male" required> <label for="male">Male</label>
+		<input type="radio" name="gender" ng-model="kin.gender" value="Female"  id="female" > <label for="female">Female</label>
 		</div>
-	</div>
 
+        <div class="col s12 "><label style="font-size:15px;color:black">Role:</label>
+		<input type="radio" name="role" ng-model="kin.role" value="Employee" id="employee" required> <label for="employee">Employee</label>
+		<input type="radio" name="role" ng-model="kin.role" value="Contractor" id="contractor"> <label for="contractor">Contractor</label>
+		<input type="radio" name="role" ng-model="kin.role" value="Intern" id="intern"> <label for="intern">Intern</label>
+		<input type="radio" name="role" ng-model="kin.role" value="Student" id="student"> <label for="student">Student</label>
+		</div>
+		 
+        </div>
+
+		<a id="yourID" style="margin-top:5px;" class="waves-effect waves-light btn"  type="submit" ng-click="save()"><i class="material-icons left">person_add</i>Signup</a>
+ <div id="preloader" class=" container progress">
+        <div class="center indeterminate"></div>
+        </div>
+	</form>
+	</div>
+<script>
+$("#preloader").hide();
+$(function(){
+    $("#yourID").on("click",function(){
+        $("#preloader").show();
+    });
+});
+</script>
  <script src="resources/theme/js/index.js"></script>
 
 </body>

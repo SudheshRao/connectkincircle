@@ -21,6 +21,11 @@ app.factory('KinService',function($http){
 		return $http.post(BASE_URL + "/login",kin);
 	}
 	
+	kinService.logout=function(){
+		console.log('entering logout person in service')
+		return $http.put(BASE_URL + "/logout");
+	}
+	
 	return kinService;
 
 })

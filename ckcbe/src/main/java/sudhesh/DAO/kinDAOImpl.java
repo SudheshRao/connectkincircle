@@ -36,6 +36,7 @@ public class kinDAOImpl {
 		return validkin;
 		
 	}
+	
 	//get all Kins dao
 	public List<Kin> getAllKins() {
 		Session session= sessionFactory.getCurrentSession();

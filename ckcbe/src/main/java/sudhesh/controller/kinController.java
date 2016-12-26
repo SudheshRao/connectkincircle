@@ -2,6 +2,8 @@ package sudhesh.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,36 +24,52 @@ public class kinController {
 	private kinDAOImpl kindao;
 
 	
-	
+	//login a kin
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ResponseEntity<?> login(@RequestBody Kin kin){
-		System.out.println("ho ho");
-
-	Kin checkkin=kindao.getKinByName(kin.getName());
-	System.out.println("ho ho");
-	if(checkkin.isStatus()==true)
-	{		System.out.println("ho ho");
-
+	public ResponseEntity<?> login(@RequestBody Kin kin, HttpSession session){
+		
 	Kin validKin=kindao.authenticate(kin);
-	System.out.println("im inn");
 	if(validKin==null){
 		Errore error=new Errore(1,"Username and password doesnt exists...");
-		return new ResponseEntity<Errore>(error,HttpStatus.UNAUTHORIZED); //401
-	}
-	else{
-		validKin.setIsonline(true);
-		kindao.updateKin(validKin); // to update online status in db
-		return new ResponseEntity<Kin>(validKin,HttpStatus.OK);//200
-	}}
-	else{
-		Errore error=new Errore(3,"you are still not authorized....");
 		return new ResponseEntity<Errore>(error,HttpStatus.UNAUTHORIZED); 
 	}
+	else{
+		Kin checkkin=kindao.getKinByName(kin.getName());
+		if(checkkin.isStatus()==true){
+			
+			session.setAttribute("kin", validKin);
+			validKin.setIsonline(true);
+			kindao.updateKin(validKin); 
+			session.setAttribute("profile", validKin);
+			return new ResponseEntity<Kin>(validKin,HttpStatus.OK);
+		}
+		else{
+			Errore error=new Errore(3,"you are still not authorized....");
+			return new ResponseEntity<Errore>(error,HttpStatus.UNAUTHORIZED);
+			}
+	}
+
 	}
 	
+	//logout a kin
+	@RequestMapping(value = "/logout", method = RequestMethod.PUT)
+	public ResponseEntity<Kin> logout(HttpSession session)	{
+		Kin validKin = (Kin) session.getAttribute("kin");
+		if(validKin!=null){
+			validKin.setIsonline(false);
+			kindao.updateKin(validKin); 
+		}
+		session.removeAttribute("kin");
+		session.invalidate();
+		return new ResponseEntity<Kin>(HttpStatus.OK);
+	}
+
 	//register a Kin
 		@RequestMapping(value="/Kin",method=RequestMethod.POST)
 		public ResponseEntity<?> createKin(@RequestBody Kin Kin){
+			Kin checkkin=kindao.getKinByName(Kin.getName());
+			if(checkkin==null){
+				
 			Kin.setStatus(true);
 			Kin.setIsonline(false);
 			Kin savedkin = kindao.saveKin(Kin);
@@ -61,6 +79,13 @@ public class kinController {
 			}
 			else
 				return new ResponseEntity<Kin>(savedkin,HttpStatus.OK);
+			}
+			else
+			{
+				Errore error=new Errore(2,"Couldnt insert user details ");
+				return new ResponseEntity<Errore>(error , HttpStatus.CONFLICT);
+			}
+				
 		}
 		
 		

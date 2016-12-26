@@ -7,23 +7,54 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
-	<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css"/> 
- 
+	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
+	<script src="resources/materialize/js/materialize.min.js"/></script>
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      
 
 	<title>KinCircle</title>
 		 
 </head>
-<body ng-app="myApp" >
- 
- <div ng-view></div>
+<body ng-app="myApp">
 
- 
+<div>
+<ul id="slide-out" class="side-nav"  >
+    <li><div class="userView">
+      <div class="background" style="background-image: url(resources/images/sideback.png);background-size:cover;"> 
+      </div>
+      <div>
+      <img class="circle" ng-show="name" src="resources/images/login-image.jpg">
+      <img class="circle center-block" style="height:100px;width:100px;" ng-hide="currentUser.name" src="resources/images/connectkincircle1.png">
+      <p ng-hide="currentUser.name">Copyrights 2017</p>
+      <span ng-show="currentUser.name"class="white-text name">{{currentUser.name}}</span>
+      <span ng-show="currentUser.name"class="white-text email">{{currentUser.post}}</span></div>
+    </div></li>
+    <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+    <li ng-show="currentUser.role=='admin'" ><a href="#/adminfunctions" class="waves-effect">Admin functions</a></li>
+    <li><a href="#!">Second Link</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Subheader</a></li>
+    <li ng-show="currentUser.name"><a class="waves-effect" ng-click="logout()"><i class="material-icons">exit_to_app</i><span>logout</span></a></li>
+  </ul></div>
+  <a href="#" style="margin:10px;"  data-activates="slide-out" class="button-collapse btn-floating btn-large waves-effect waves-light red"><i style="font-size:30px;" class="material-icons">menu</i></a>
+  <a  style="margin:10px;" ng-show="currentUser.name" ng-click="logout()" class="right  btn-floating btn-large waves-effect waves-light"><i style="font-size:30px;" class="material-icons">exit_to_app</i></a>
+   
+   <div ng-view></div>      
+
+ <script>
+ $(".button-collapse").sideNav({
+	 closeOnClick: true,
+	 edge: 'left'
+	 });
+ $('.collapsible').collapsible();     
+ </script>
 <script src="resources/bootstrap/js/jquery-3.1.0.min.js"/></script> 
-<script src="resources/bootstrap/js/bootstrap.min.js"/></script>
     
 <script src="angularjs/app.js"></script>
 <script src="angularjs/kincontroller.js"></script>
 <script src="angularjs/kinservice.js"></script>
+<script src="angularjs/admincontroller.js"></script>
+<script src="angularjs/adminservice.js"></script>
 
       
 </body>

@@ -3,104 +3,121 @@
 <head>
 <meta charset="ISO-8859-1">
 <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<link rel="stylesheet" href="resources/theme/css/home.css"/>
-	
-	<link rel="stylesheet" href="resources/theme/css/index.css"/> 	
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>	
+<style>
+body{
+background:url(resources/images/homewall.jpg);
+background-size:cover;
+background-repeat:no-repeat;
+}
+ /*{
+        dist:0,
+        shift:0,
+        padding:20,
 
+  }*/   
+</style>
+	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
+	<script src="resources/materialize/js/materialize.min.js"/></script>
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container dad" style="width: 100%; padding: 0;">
-    <div class="row" style="float: right;">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div onclick="location.href='#/login';" class="grow vertical-tab-1">
-					<p class="tab-title"></p> 
-					<p class="rotate">Log in</p>
-				</div>
-				<div onclick="location.href='#/signup';" class="grow vertical-tab-2">
-					<p class="tab-title"></p> 
-					<p class="rotate">Sign up</p>
-				</div>
-				<div class="grow vertical-tab-3">
-					<p class="tab-title"></p> 
-					<p class="rotate">About</p>
-				</div>
-				
-				<div class="grow vertical-tab-4">
-					<p class="tab-title"></p> 
-					<p class="rotate">Contact</p>
-				</div>
-		</div>
-	</div>
-</div>
 
-<div id="wrapper" >
-        <div class="overlay"></div>
-        
+ <div class="carousel intro" data-indicators="true">
+ 
+    <div class="carousel-item"><img src="resources/images/connectkincircle1.png"><h5 class="center-align">Hi there</h5>
+    </div>
     
-        <!-- Sidebar -->
-        <nav class="navbar navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-            <ul class="nav sidebar-nav">
-            	<li> 
-            		<div class="sidebar-header header-cover" style="background-image: url(http://2.bp.blogspot.com/-2RewSLZUzRg/U-9o6SD4M6I/AAAAAAAADIE/voax99AbRx0/s1600/14%2B-%2B1%2B%281%29.jpg);background-size:cover;">
-            		<img  style="width:75px;height:75px;margin:20px auto 10px 10px;" class="img-circle" src="resources/images/login-image.jpg">
-            		</div>
-            	</li>
-                <li>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">Team</a>
-                </li>
-                <li class="dropdown">
-                  <a class="dropdown-toggle" data-toggle="dropdown">Works <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li class="dropdown-header">Dropdown heading</li>
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-                <li>
-                    <a href="#">Follow me</a>
-                </li>
-            </ul>
-           
-            
-        </nav>
-        <!-- /#sidebar-wrapper -->
+    <div class="carousel-item">
+		<div class="card" style="height:250px;">
+    	
+    	<div class="card-image waves-effect waves-block waves-light">
+      		<img style="height:160px;" class="activator" src="resources/images/homeconnect.jpg">
+    	</div>
+    	
+    	<div class="card-content">
+      		<span class="card-title activator grey-text text-darken-4">Connect<i class="material-icons right">more_vert</i></span>
+    	</div>
+    	
+    	<div class="card-reveal">
+      		<span class="card-title grey-text text-darken-4">Connect<i class="material-icons right">close</i></span>
+      		<p>This portal helps to connect with kins.</p>
+    	</div>
+  	
+  		</div>
+	</div>
+	
+    <div class="carousel-item" >
+    	<div class="card" style="height:250px;">
+    	
+    	<div class="card-image waves-effect waves-block waves-light">
+      		<img  style="height:160px;"class="activator" src="resources/images/homeintranet.png">
+    	</div>
+    	
+    	<div class="card-content">
+      		<span class="card-title activator grey-text text-darken-4">Intranet<i class="material-icons right">more_vert</i></span>
+    	</div>
+    	
+    	<div class="card-reveal">
+      		<span class="card-title grey-text text-darken-4">Intranet<i class="material-icons right">close</i></span>
+      		<p>An internal website that helps employees get stuff done.</p>
+    	</div>
+  	
+  		</div>
+  	</div>
+  
+    <div class="carousel-item">
+		<div class="card" style="height:250px;">
+    	
+    	<div class="card-image waves-effect waves-block waves-light">
+      		<img style="height:160px;" class="activator" src="resources/images/homeblog.jpeg">
+    	</div>
+    	
+    	<div class="card-content">
+      		<span class="card-title activator grey-text text-darken-4">Blog<i class="material-icons right">more_vert</i></span>
+    	</div>
+    	
+    	<div class="card-reveal">
+      		<span class="card-title grey-text text-darken-4">Blog<i class="material-icons right">close</i></span>
+      		<p>Know the news uploaded by others.</p>
+    	</div>
+  	
+  		</div>
+	</div>
+	
+    <div class="carousel-item">
+		<div class="card" style="height:250px;">
+    	
+    	<div class="card-image waves-effect waves-block waves-light">
+      		<img style="height:160px;" class="activator" src="resources/images/homejobs.jpg">
+    	</div>
+    	
+    	<div class="card-content">
+      		<span class="card-title activator grey-text text-darken-4">Jobs<i class="material-icons right">more_vert</i></span>
+    	</div>
+    	
+    	<div class="card-reveal">
+      		<span class="card-title grey-text text-darken-4">Jobs<i class="material-icons right">close</i></span>
+      		<p>Search for jobs within the organization.</p>
+    	</div>
+		</div>
+  	</div>
+  	
+  </div>
 
-        <!-- Page Content -->
-        <div id="">
-        <div>
-            <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
-                <span class="hamb-top"></span>
-    			<span class="hamb-middle"></span>
-				<span class="hamb-bottom"></span>
-            </button>
-            </div>
-            
-        <!-- /#page-content-wrapper -->
+	<div class="center-align" ng-hide="currentUser.name">
+		<a href="#/login" class="waves-effect waves-light btn"><i class="material-icons left">person</i>Login</a>
+		<a href="#/signup" class="waves-effect waves-light btn"><i class="material-icons left">person_add</i>Sign-up</a>
+	</div>
+	
 
-    </div></div>
 
- <script src="resources/theme/js/index.js"></script>
-
-     
+  <script>
+  $(document).ready(function(){
+    $('.carousel').carousel();
+    $('.carousel').carousel('next',5);
+  });      
+  </script>  
+   
 </body>
 </html>

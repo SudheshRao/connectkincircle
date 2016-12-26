@@ -11,6 +11,14 @@ app.config(function($routeProvider) {
 		controller:'KinController',
 		templateUrl:'views/login.html'
 	})
+	.when('/adminfunctions',{
+		controller:'AdminController',
+		templateUrl:'views/adminfunctions.html'
+	})
+		.when('/provideaccess',{
+		controller:'AdminController',
+		templateUrl:'views/provideaccess.html'
+	})
 	.when('/', {
 		templateUrl : 'views/home.html'
 			

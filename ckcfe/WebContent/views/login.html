@@ -2,32 +2,86 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
-	<link rel="stylesheet" href="resources/theme/css/index.css"/> 	
-	<link rel="stylesheet" href="resources/theme/css/login.css"/> 	
-
+<title>Insert title here</title>	
+	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
+	<script src="resources/materialize/js/materialize.min.js"/></script>
+<style>
+body{
+  background: url(resources/images/homewall.jpg) no-repeat;
+  background-size:cover;
+  }
+       /* label color */
+   .input-field label {
+     color: #000;
+   }
+   /* label focus color */
+   .input-field input[type=text]:focus + label {
+     color: #000;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:focus {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+   .input-field input[type=password]:focus + label {
+     color: #000;
+   }
+   /* label underline focus color */
+   .input-field input[type=password]:focus {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+     /* icon prefix focus color */
+   .input-field .prefix.active {
+     color: white;
+   }
+</style>
 </head>
 <body>
-<div class="container">
-  <div class="login">
-  	<h1 class="login-heading">
-      <strong>Welcome.</strong> Please login.</h1>
-      <form method="post">
-        <input type="text" name="user" placeholder="Username" ng-model="kin.name" required="required" class="input-txt" />
-          <input type="password" name="password" placeholder="Password" ng-model="kin.password" required="required" class="input-txt" />
-          <div class="login-footer">
-             <a href="#" class="lnk">
-              <span class="icon icon--min"></span> 
-              Please Sign-up, if not.
-            </a>
-            <button type="submit" ng-click="submit()" class="btn btn--right">Log in</button>
-    
-          </div>
-      </form>
-  </div>
-</div>
+	<div  id="login">	
 
-<script src="resources/theme/js/index.js"></script>
+		<h1 class="center-align">
+      <strong>Welcome.</strong> Please login.</h1>
+		<form class="container"  method="post">
+		
+		<div class="row">
+        <div class="input-field col s4 offset-s4">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="icon_prefix" type="text" class="validate" name="user" ng-model="kin.name" required="required">
+          <label for="icon_prefix">Name</label>
+        </div>
+        </div>
+
+		<div class="row">
+        <div class="input-field col s4 offset-s4">
+          <i class="material-icons prefix">security</i>
+          <input id="icon_telephone" type="password" class="validate" name="password" ng-model="kin.password" required="required">
+          <label for="icon_telephone">Password</label>
+        </div>
+        </div>
+
+		<div class="row">
+        <div class="col s4 offset-s6"><a id="yourID" class="waves-effect waves-light btn"  type="submit" ng-click="submit()"><i class="material-icons left">person</i>Login</a></div>
+        		<div style="margin-top:10px;" class="col s4 offset-s6"><a href="#/signup" class="white-text">Please Sign-up, if not.</a></div>
+        
+        </div>
+        <div id="div" ng-show="mess.message" class="container center-align">{{mess.message}}</div>
+        <div id="preloader" class=" container progress">
+        <div class="center indeterminate"></div>
+        </div>
+        
+    </form>
+
+</div>
+<script>
+$("#preloader").hide();
+$(function(){
+    $("#yourID").on("click",function(){
+        $("#preloader").show();
+        });
+});
+
+</script>
 
 
 </body>
