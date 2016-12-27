@@ -18,7 +18,7 @@ import sudhesh.model.Errore;
 import sudhesh.model.Kin;
 
 @Controller
-public class kinController {
+public class KinController {
 	
 	@Autowired
 	private kinDAOImpl kindao;
@@ -70,7 +70,7 @@ public class kinController {
 			Kin checkkin=kindao.getKinByName(Kin.getName());
 			if(checkkin==null){
 				
-			Kin.setStatus(true);
+			Kin.setStatus(false);
 			Kin.setIsonline(false);
 			Kin savedkin = kindao.saveKin(Kin);
 			if(savedkin.getId()==0){

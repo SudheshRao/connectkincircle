@@ -7,5 +7,19 @@ app.factory('AdminService',function($http){
 		console.log('entering fetchallpersons in service')
 		return $http.get(BASE_URL + "/provideaccess");
 	}
+	
+	adminService.fetchbadges=function(){
+		return $http.get(BASE_URL + "/fetchbadges");
+	}
+	
+	adminService.permit=function(kin){
+		console.log('entering fetchallpersons in service')
+		return $http.post(BASE_URL + "/permit",kin);
+	}
+	
+	adminService.deny=function(kin){
+		console.log('entering fetchallpersons in service')
+		return $http.post(BASE_URL + "/deny",kin);
+	}
 	return adminService;
 })

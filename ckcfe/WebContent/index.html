@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
 	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
 	<script src="resources/materialize/js/materialize.min.js"/></script>
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -30,7 +30,7 @@
       <span ng-show="currentUser.name"class="white-text email">{{currentUser.post}}</span></div>
     </div></li>
     <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-    <li ng-show="currentUser.role=='admin'" ><a href="#/adminfunctions" class="waves-effect">Admin functions</a></li>
+    <li ng-show="currentUser.role=='admin'" ><a href="#/adminfunctions" class="waves-effect waves-light btn">Admin functions</a></li>
     <li><a href="#!">Second Link</a></li>
     <li><div class="divider"></div></li>
     <li><a class="subheader">Subheader</a></li>

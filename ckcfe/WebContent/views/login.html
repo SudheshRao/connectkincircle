@@ -66,7 +66,7 @@ body{
         
         </div>
         <div id="div" ng-show="mess.message" class="container center-align">{{mess.message}}</div>
-        <div id="preloader" class=" container progress">
+        <div id="preloader" ng-hide="mess.message" class=" container progress">
         <div class="center indeterminate"></div>
         </div>
         

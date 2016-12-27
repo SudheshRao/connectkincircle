@@ -78,6 +78,12 @@ public class kinDAOImpl {
 		return existingkin;
 	}
 
+	public Kin updateaKin(Kin kin) {
+		Session session=sessionFactory.getCurrentSession();
+		session.update(kin);
+		session.flush();
+		return kin;
+	}
 	public void deleteKin(int id) {
 		Session session=sessionFactory.getCurrentSession();
 		Kin Kin=(Kin)session.get(Kin.class, id);

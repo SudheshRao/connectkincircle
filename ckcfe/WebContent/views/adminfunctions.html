@@ -3,8 +3,10 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
+	<script src="resources/materialize/js/materialize.min.js"/></script>
 </head>
 <body>
- <div ng-show="currentUser.name"><a class="waves-effect" ng-click="fetchKinsforAccess()">Provide access</a></div>
+ <div ng-show="currentUser.name"><a class="waves-effect waves-light btn" ng-click="fetchKinsforAccess()">Provide access<span class="new badge red">{{badge.stat}}</span></a></div>
 </body>
 </html>
