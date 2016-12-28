@@ -22,6 +22,7 @@ public class Job {
 	private String location;
 	private String notice;
 	private Date postedon;
+	
 	public Date getPostedon() {
 		return postedon;
 	}

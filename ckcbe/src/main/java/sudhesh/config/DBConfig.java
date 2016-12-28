@@ -15,6 +15,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import sudhesh.model.Job;
 import sudhesh.model.Kin;
 
 
@@ -67,9 +68,8 @@ public class DBConfig {
 	
    sessionBuilder.addProperties(getHibernateProperties());
 	sessionBuilder.addAnnotatedClass(Kin.class);
-	
-	System.out.println("Database connected");
-		
+	sessionBuilder.addAnnotatedClass(Job.class);
+			
 	return sessionBuilder.buildSessionFactory();
 	
 	}

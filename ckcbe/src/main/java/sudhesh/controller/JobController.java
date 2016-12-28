@@ -1,7 +1,6 @@
 package sudhesh.controller;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +28,9 @@ public class JobController {
 
 	@RequestMapping(value="/postJob",method=RequestMethod.POST)
 	public ResponseEntity<?> postJob(@RequestBody Job job,HttpSession session){
-		Kin user=(Kin)session.getAttribute("currentUser");	
+		
+		Kin user=(Kin)session.getAttribute("kin");	
+		System.out.println(user);
 		if(user==null){	
 			Errore error=new Errore(1,"Unauthorized user.. login using valid credentials");
 			return new ResponseEntity<Errore>(error,HttpStatus.UNAUTHORIZED);
@@ -51,5 +53,6 @@ public class JobController {
     	List<Job> jobs=jobdao.getAllJobs();
     	return new ResponseEntity<List<Job>>(jobs,HttpStatus.OK);
     }
+    
 
 }

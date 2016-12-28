@@ -4,9 +4,9 @@
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+
 	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
 	<script src="resources/materialize/js/materialize.min.js"/></script>
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -30,6 +30,7 @@
       <span ng-show="currentUser.name"class="white-text email">{{currentUser.post}}</span></div>
     </div></li>
     <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+    <li ng-show="currentUser.name" ><a href="#/searchjob" class="waves-effect waves-light btn">Job Search</a></li>
     <li ng-show="currentUser.role=='admin'" ><a href="#/adminfunctions" class="waves-effect waves-light btn">Admin functions</a></li>
     <li><a href="#!">Second Link</a></li>
     <li><div class="divider"></div></li>
@@ -49,13 +50,18 @@
  $('.collapsible').collapsible();     
  </script>
 <script src="resources/bootstrap/js/jquery-3.1.0.min.js"/></script> 
-    
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-resource.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-cookies.js"></script>   
 <script src="angularjs/app.js"></script>
 <script src="angularjs/kincontroller.js"></script>
 <script src="angularjs/kinservice.js"></script>
 <script src="angularjs/admincontroller.js"></script>
 <script src="angularjs/adminservice.js"></script>
-
+<script src="angularjs/jobcontroller.js"></script>
+<script src="angularjs/jobservice.js"></script>
       
 </body>
+
 </html>

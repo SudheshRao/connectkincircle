@@ -10,25 +10,34 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import sudhesh.model.Job;
+
 @Repository
 @Transactional
 public class jobDaoImpl {
+	
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+	
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 		
 		public void postJob(Job job) {
-			Session session=sessionFactory.openSession();
+			Session session=sessionFactory.getCurrentSession();
 			session.save(job);
 			session.flush();
-			session.close();
 
 		}
 
 		public List<Job> getAllJobs() {
-			Session session=sessionFactory.openSession();
+			Session session=sessionFactory.getCurrentSession();
 			Query query=session.createQuery("from Job");
 			List<Job> jobs=query.list();
-			session.close();
+			session.flush();
 			return jobs;
 		}
 
