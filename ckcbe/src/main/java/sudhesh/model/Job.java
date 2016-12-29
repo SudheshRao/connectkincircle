@@ -22,7 +22,21 @@ public class Job {
 	private String location;
 	private String notice;
 	private Date postedon;
+	private String postedby;
+	private int postedbyId;
 	
+	public int getPostedbyId() {
+		return postedbyId;
+	}
+	public void setPostedbyId(int postedbyId) {
+		this.postedbyId = postedbyId;
+	}
+	public String getPostedby() {
+		return postedby;
+	}
+	public void setPostedby(String postedby) {
+		this.postedby = postedby;
+	}
 	public Date getPostedon() {
 		return postedon;
 	}

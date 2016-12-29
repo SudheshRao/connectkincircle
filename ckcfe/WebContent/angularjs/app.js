@@ -19,6 +19,18 @@ app.config(function($routeProvider) {
 		controller:'AdminController',
 		templateUrl:'views/provideaccess.html'
 	})
+	.when('/denyaccess',{
+		controller:'AdminController',
+		templateUrl:'views/denyaccess.html'
+	})
+	.when('/makeassistadmin',{
+		controller:'AdminController',
+		templateUrl:'views/makeassistadmin.html'
+	})
+	.when('/deletekin',{
+		controller:'AdminController', 
+		templateUrl:'views/deletekin.html' 
+	})
 	.when('/postjob',{
 		controller:'JobController',
 		templateUrl:'views/postjob.html' 
@@ -44,7 +56,6 @@ app.config(function($routeProvider) {
 		$cookieStore.remove('currentUser')
 		KinService.logout().then(function(response){
 			console.log("logged out successfully..");
-			$scope.message="Logged out Successfully";
 			$location.path('/login');
 			},
 			

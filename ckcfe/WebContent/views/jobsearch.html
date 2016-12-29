@@ -3,31 +3,44 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<style>
+body{
+  background: url(resources/images/reactive-recruitment.jpg) no-repeat;
+  background-size:cover;
+  }
+ </style> 
 </head>
 <body>
-<table>
-<tr>
-<th>Job Title</th>
-</tr>
-<tr ng-repeat="job in jobs">
-<td>
-<a ng-click="getJobDetail(job.id)" >{{job.jobtitle}}</a>
-</td>
-</tr>
-</table>
-<div ng-show="showJobDetail">
-<B>Job Details</B> <BR>
-TITLE: 
-{{jobDetail.jobtitle}}<br>
-JOB DESCRIPTION: 
-{{jobDetail.jd}}<br>
-SKILLS REQUIRED:
-{{jobDetail.skills}}<br>
-SALARY
-{{jobDetail.salary}}
-<br>
-LOCATION
-{{jobDetail.location}}<br>
+<div class="row">
+<div class="col s4 m6 l6 offset-s4 offset-m3 offset-l3">
+<ul class="collapsible"  data-collapsible="accordion">
+    <li ng-repeat="job in jobs" >
+      <div class="collapsible-header"><i class="material-icons">work</i>{{job.jobtitle}}</div>
+      <div class="collapsible-body grey lighten-4">
+      <div style="margin-left:10px;">
+      	TitleE: {{job.jobtitle}}<br>
+      	Job Description: {{job.jd}}<br>
+      	Job Specification: {{job.js}}<br> 
+      	Skills Required: {{job.skills}}<br>
+      	Salary: {{job.salary}}<br>
+      	Location: {{job.location}}<br>
+      	Notice: {{job.notice}}<br>
+      	<div class="right-align">
+      	Posted on: {{job.postedon | date:'MM/dd/yyyy'}}<br>
+      	Postedby: {{job.postedby}}<br>
+      	</div>      
+      </div>
+      </div>
+    </li>
+</ul>
 </div>
+</div>
+<script>
+$(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+</script>        
+
 </body>
 </html>

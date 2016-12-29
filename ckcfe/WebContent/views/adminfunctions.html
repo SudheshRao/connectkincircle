@@ -8,6 +8,10 @@
 </head>
 <body>
  <div ng-show="currentUser.name"><a class="waves-effect waves-light btn" ng-click="fetchKinsforAccess()">Provide access<span class="new badge red">{{badge.stat}}</span></a></div>
+  <div ng-show="currentUser.name"><a class="waves-effect waves-light btn" ng-click="fetchKinstoDenyAccess()">Deny access<span class="badge red">{{badge.statd}}</span></a></div>
+   <div ng-show="currentUser.name"><a class="waves-effect waves-light btn" ng-click="fetchKinstoDelete()">Delete Kin<span class="badge red">{{badge.statd}}</span></a></div>
+    <div ng-show="currentUser.name"><a class="waves-effect waves-light btn" ng-click="fetchKinstoAssistAdmin()">Make Kin Assist Admin</a></div>
+ 
  <div ng-show="currentUser.name"><a class="waves-effect waves-light btn" href="#/postjob">Post Job</a></div>
 </body>
 </html>

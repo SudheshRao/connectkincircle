@@ -1,9 +1,9 @@
-app.controller('JobController',function($scope,$location,JobService){
-	$scope.job={id:'',jobtitle:'',jd:'',js:'',skills:'',salary:'',loctaion:'',notice:'',postedon:''};
+app.controller('JobController',function($scope,$location,$rootScope,JobService){
+	$scope.job={id:'',jobtitle:'',jd:'',js:'',skills:'',salary:'',loctaion:'',notice:'',postedon:'',postedby:'',postedbyId:''};
 	$scope.jobs;
 	
 	$scope.saveJob=function(){
-		console.log('entering save job in job controller')
+		console.log('entering post job in job controller');
 		JobService.saveJob($scope.job)
 		.then(function(response){
 			console.log("successfully inserted job details");

@@ -3,6 +3,7 @@ app.controller('KinController',function($http,$scope,$rootScope,$location,$cooki
 	$scope.kins;
 	$scope.kin={id:'',name:'',password:'',confirmpasswprd:'',gender:'',email:'',phoneno:'',dob:'',isonline:'',status:'',role:'',post:''};
 	$scope.errore={code:'',message:''};
+	$scope.mess;
 	
 	//signup code
 	$scope.save=function(){
@@ -22,11 +23,10 @@ app.controller('KinController',function($http,$scope,$rootScope,$location,$cooki
 			$scope.kin=response.data;
 			$rootScope.currentUser=$scope.kin;
 			$cookieStore.put('currentUser',$rootScope.currentUser);
-			$http.defaults.headers.common['Authorization'] = 'Basic' + $rootScope.currentUser;	    	 
 			$location.path("/");},
 			function(response){
 				 $scope.errore=response.data;
-				  $rootScope.mess=$scope.errore;
+				  $scope.mess=$scope.errore;
 				  $location.path("/login");
 			});
 

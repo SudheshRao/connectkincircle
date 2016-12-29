@@ -3,10 +3,12 @@ package sudhesh.model;
 public class Badges {
 	int kins;
 	int stat;
-	public Badges(int kins,int stat){
+	int statd;
+	public Badges(int kins,int stat, int statd){
 		super();
 		this.kins = kins;
 		this.stat = stat;
+		this.statd = statd;
 	}
 
 	public int getKins() {
@@ -18,8 +20,14 @@ public class Badges {
 	public int getStat() {
 		return stat;
 	}
-	public void setStat(int stat) {
-		this.stat = stat;
+	public void setStat(int statd) {
+		this.stat = statd;
+	}
+	public int getStatd() {
+		return statd;
+	}
+	public void setStatd(int statd) {
+		this.statd = statd;
 	}
 
 }

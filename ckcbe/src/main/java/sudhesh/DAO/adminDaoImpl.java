@@ -36,5 +36,27 @@ public class adminDaoImpl {
 			return Kins;
 
 	}
+	
+	//get kins to deny access provision
+		public List<Kin> getKinstoDenyAccess() {
+				Session session= sessionFactory.getCurrentSession();
+				Query query=session.createQuery("from Kin where status =:un");
+				query.setParameter("un", true);
+				List<Kin> Kins=query.list();
+				session.flush();
+				return Kins;
+
+		}
+
+		public List<Kin> getKinstoAssistAdmin() {
+			System.out.println("dao");
+			Session session= sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from Kin where lower(role) = lower('employee')");
+			List<Kin> Kins=query.list();
+			for(Kin kin:Kins)
+				System.out.println(kin.getId());
+			session.flush();
+			return Kins;
+		}
 
 }
