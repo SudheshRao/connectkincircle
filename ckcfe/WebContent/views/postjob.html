@@ -38,11 +38,15 @@ body{
 </head>
 <body>
 
-	<div class="container">
-		<h1 class="center-align">
-      <strong>Welcome.</strong> Please Signup.</h1>
+    <div class="center-align" ng-show="currentUser.role!='admin'">
+    <div ><img class="circle" src="resources/images/200.gif"></div>
+    <h1><strong class="red-text">Access Denied</strong></h1>
+    <h4>You are not authorized to post job</h4>
+    </div>
+	<div class="container" ng-show="currentUser.role=='admin'">
+		<h1 class="center-align">Post Job</h1>
 			
-	<form class="container">
+	<form class="container" >
 	
 		<div class="row">
         <div class="input-field col s6 ">

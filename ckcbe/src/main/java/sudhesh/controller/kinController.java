@@ -1,5 +1,9 @@
 package sudhesh.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import sudhesh.DAO.UploadFileDaoImpl;
 import sudhesh.DAO.kinDAOImpl;
 import sudhesh.model.Errore;
 import sudhesh.model.Kin;
+import sudhesh.model.UploadFile;
 
 @Controller
 public class KinController {
@@ -23,6 +29,9 @@ public class KinController {
 	@Autowired
 	private kinDAOImpl kindao;
 
+	@Autowired
+	private UploadFileDaoImpl uploadFileDao;
+	
 	
 	//login a kin
 	@RequestMapping(value="/login",method=RequestMethod.POST)
@@ -34,17 +43,15 @@ public class KinController {
 		return new ResponseEntity<Errore>(error,HttpStatus.UNAUTHORIZED); 
 	}
 	else{
-		Kin checkkin=kindao.getKinByName(kin.getName());
-		if(checkkin.isStatus()==true){
+		if(validKin.isStatus()==true){
 			
 			session.setAttribute("kin", validKin);
 			validKin.setIsonline(true);
-			kindao.updateKin(validKin); 
-			session.setAttribute("profile", validKin);
+			kindao.updateKin(validKin);
 			return new ResponseEntity<Kin>(validKin,HttpStatus.OK);
 		}
 		else{
-			Errore error=new Errore(3,"you are still not authorized....");
+			Errore error=new Errore(3,"you are still not authorized....Contact Admin");
 			return new ResponseEntity<Errore>(error,HttpStatus.UNAUTHORIZED);
 			}
 	}
@@ -55,9 +62,10 @@ public class KinController {
 	@RequestMapping(value = "/logout", method = RequestMethod.PUT)
 	public ResponseEntity<Kin> logout(HttpSession session)	{
 		Kin validKin = (Kin) session.getAttribute("kin");
+		System.out.println("logout");
 		if(validKin!=null){
 			validKin.setIsonline(false);
-			kindao.updateKin(validKin); 
+			kindao.updateKin(validKin);
 		}
 		session.removeAttribute("kin");
 		session.invalidate();
@@ -66,13 +74,23 @@ public class KinController {
 
 	//register a Kin
 		@RequestMapping(value="/Kin",method=RequestMethod.POST)
-		public ResponseEntity<?> createKin(@RequestBody Kin Kin){
+		public ResponseEntity<?> createKin(@RequestBody Kin Kin,HttpSession session) throws IOException{
 			Kin checkkin=kindao.getKinByName(Kin.getName());
 			if(checkkin==null){
 				
 			Kin.setStatus(false);
 			Kin.setIsonline(false);
 			Kin savedkin = kindao.saveKin(Kin);
+			session.setAttribute("kini",savedkin);
+            FileInputStream fin= new FileInputStream("C:/Users/K.S.Raghavendra Bhat/workspace/ckcfe/WebContent/resources/images/connectkincircle1.png");
+            FileOutputStream fout=new FileOutputStream("C:/Users/K.S.Raghavendra Bhat/workspace/ckcfe/WebContent/resources/dp/"+savedkin.getName());  
+            int i=0;  
+            while((i=fin.read())!=-1){  
+            fout.write((byte)i);  
+            }
+            fout.close();
+            fin.close();
+            
 			if(savedkin.getId()==0){
 				Errore error=new Errore(2,"Couldnt insert user details ");
 				return new ResponseEntity<Errore>(error , HttpStatus.CONFLICT);
@@ -132,11 +150,15 @@ public class KinController {
 	@RequestMapping(value="/Kin/{id}",method=RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteKin(@PathVariable int id){
 		Kin Kin=kindao.getKinById(id);
-		if(Kin==null)
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-		else{
+		try{
+     		File file=new File("C:/Users/K.S.Raghavendra Bhat/workspace/ckcfe/WebContent/resources/dp/"+Kin.getName());
+     		file.delete();	
+     		}catch(Exception e){e.printStackTrace();}
+        UploadFile uploadFile = uploadFileDao.getFile(Kin.getName());
+        if(uploadFile!=null)
+        uploadFileDao.deletpic(uploadFile);
 		kindao.deleteKin(id);
-		return new ResponseEntity<Void>(HttpStatus.OK);}
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 	

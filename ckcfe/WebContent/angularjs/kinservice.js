@@ -15,7 +15,6 @@ app.factory('KinService',function($http){
 			return response.status
 		})
 	}
-	
 	kinService.authenticate=function(kin){
 		console.log('entering login person in service')
 		return $http.post(BASE_URL + "/login",kin);

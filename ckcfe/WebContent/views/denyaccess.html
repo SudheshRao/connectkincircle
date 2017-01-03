@@ -14,14 +14,20 @@ background-repeat:no-repeat;
 </style>
 </head>
 <body>
-  
   <div class="row">
-   <div ng-repeat="kin in ad">
+  <div class="input-field col s12 m6 l4 offset-m3 offset-l4 ">
+          <input id="icon_prefix" type="text" class="validate" ng-model="searchText">
+          <label for="icon_prefix">Search</label>
+        </div>
+  </div>
+  <div class="row">
+  
+   <div ng-repeat="kin in ad | filter:searchText">
    
    <div class="col s12 m4 l3">
   	<div class="card sticky-action hoverable">
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator circle center-block"src="resources/images/connectkincircle1.png">
+      <img class="activator circle center-block"src="resources/dp/{{kin.name}}">
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4">{{kin.name}}<i class="material-icons right">more_vert</i></span>

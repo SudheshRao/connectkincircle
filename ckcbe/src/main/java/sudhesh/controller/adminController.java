@@ -1,5 +1,8 @@
 package sudhesh.controller;
 
+
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import sudhesh.DAO.UploadFileDaoImpl;
 import sudhesh.DAO.adminDaoImpl;
 import sudhesh.DAO.kinDAOImpl;
 import sudhesh.model.Badges;
 import sudhesh.model.Kin;
+import sudhesh.model.UploadFile;
 
 @Controller
 public class AdminController {
@@ -26,8 +31,7 @@ public class AdminController {
 	//get kins for access provision
 	@RequestMapping(value="/provideaccess",method=RequestMethod.GET)
 	public  ResponseEntity<List<Kin>> getKinsforAccess(){
-		List<Kin> Kins=admindao.getKinsforAccess();
-	
+		List<Kin> Kins=admindao.getKinsforAccess();	
 		if(Kins.isEmpty())
 			return new ResponseEntity<List<Kin>>(HttpStatus.NO_CONTENT);
 		else
@@ -60,16 +64,19 @@ public class AdminController {
 		
 	//permit access
 	@RequestMapping(value="/permit",method=RequestMethod.POST)
-	public  ResponseEntity<?> permit(@RequestBody Kin kin){
+	public  ResponseEntity<?> permit(@RequestBody Kin kin) throws IOException{
 		kin.setStatus(true);
 		kindao.updateaKin(kin);
-		System.out.println(kin.isStatus());
 		return new ResponseEntity<Kin>(HttpStatus.OK);
 	}
 	
 	//deny access
 	@RequestMapping(value="/deny",method=RequestMethod.POST)
 	public  ResponseEntity<?> deny(@RequestBody Kin kin){
+		try{
+     		File file=new File("C:/Users/K.S.Raghavendra Bhat/workspace/ckcfe/WebContent/resources/dp/"+kin.getName());
+     		file.delete();	
+     		}catch(Exception e){e.printStackTrace();}
 		kindao.deleteKin(kin.getId());
 		return new ResponseEntity<Kin>(HttpStatus.OK);
 	}
@@ -91,6 +98,14 @@ public class AdminController {
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 		
+		//changerole
+				@RequestMapping(value="/changerole",method=RequestMethod.POST)
+				public ResponseEntity<Void> Changerole(@RequestBody Kin kin){
+					Kin Kin=kindao.getKinById(kin.getId());
+					Kin.setRole(kin.getRole());
+					kindao.updateaKin(Kin);
+					return new ResponseEntity<Void>(HttpStatus.OK);
+				}
 	//fetch badges
 	@RequestMapping(value="/fetchbadges",method=RequestMethod.GET)
 	public  ResponseEntity<?> fetchbadges(){

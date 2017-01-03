@@ -40,7 +40,7 @@ public class adminDaoImpl {
 	//get kins to deny access provision
 		public List<Kin> getKinstoDenyAccess() {
 				Session session= sessionFactory.getCurrentSession();
-				Query query=session.createQuery("from Kin where status =:un");
+				Query query=session.createQuery("from Kin where status =:un and role != 'admin'");
 				query.setParameter("un", true);
 				List<Kin> Kins=query.list();
 				session.flush();
@@ -51,7 +51,7 @@ public class adminDaoImpl {
 		public List<Kin> getKinstoAssistAdmin() {
 			System.out.println("dao");
 			Session session= sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from Kin where lower(role) = lower('employee')");
+			Query query = session.createQuery("from Kin where lower(role) = lower('employee') and role!='admin'");
 			List<Kin> Kins=query.list();
 			for(Kin kin:Kins)
 				System.out.println(kin.getId());

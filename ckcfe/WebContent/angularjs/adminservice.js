@@ -2,6 +2,11 @@ app.factory('AdminService',function($http){
 	var BASE_URL="http://localhost:8080/ckcbe/";
 	var adminService=this;
 	
+	adminService.kcr=function(kin){
+		console.log('entering fetch kins for access in service')
+		return $http.post(BASE_URL + "/changerole",kin);
+	}
+	
 	//fetch kins for access provision
 	adminService.fetchKinsforAccess=function(){
 		console.log('entering fetch kins for access in service')
@@ -19,7 +24,7 @@ app.factory('AdminService',function($http){
 		console.log('entering fetch kins to assist admin in service')
 		return $http.get(BASE_URL + "/assistadmin");
 	}
-		
+	
 	//permit kins access
 	adminService.permit=function(kin){
 		console.log('entering permit kin.s access service')

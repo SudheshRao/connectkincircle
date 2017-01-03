@@ -3,6 +3,7 @@ app.controller('AdminController',function($http,$scope,$rootScope,$route,$locati
 	$scope.kins;
 	$scope.kin={id:'',name:'',password:'',confirmpasswprd:'',gender:'',email:'',phoneno:'',dob:'',isonline:'',status:'',role:'',post:''};
 	$scope.badges={kins:'',stat:'',statd:''};
+	$scope.changedrole;
 
 	//fetch kins for access provision
 	$scope.fetchKinsforAccess=function(){
@@ -29,6 +30,22 @@ app.controller('AdminController',function($http,$scope,$rootScope,$route,$locati
 					$scope.kins=response.data;
 					$rootScope.ad=$scope.kins;
 					$location.path("/denyaccess");
+				},
+				function(error){
+					console.log(error);
+				}
+		)
+	}
+	
+	//fetch kins to change role
+	$scope.fetchKinstoChangeRole=function(){
+		console.log('entering fetch kins to  change role in controller')
+		AdminService.fetchKinstoDenyAccess()
+		.then(
+				function(response){
+					$scope.kins=response.data;
+					$rootScope.cr=$scope.kins;
+					$location.path("/changerole");
 				},
 				function(error){
 					console.log(error);
@@ -116,6 +133,14 @@ app.controller('AdminController',function($http,$scope,$rootScope,$route,$locati
 		$scope.fetchKinstoAssistAdmin()})
 	}
 	
+	//change kins role
+	$scope.changerole=function(kino){
+		$scope.kin=kino;
+		console.log('entering make assist admin in controller');
+		AdminService.kcr($scope.kin).then(function(){
+			$scope.fetchKinstoChangeRole()
+		})
+	}
 	
 	//fetching badges for external info
 	function fetchbadges(){
@@ -129,9 +154,9 @@ app.controller('AdminController',function($http,$scope,$rootScope,$route,$locati
 	}
 	
 	//refresh compensator
-	if($location.path()=='/deletekin'){$scope.fetchKinstoDelete();}
-	if($location.path()=='/provideaccess'){$scope.fetchKinsforAccess();}
-	if($location.path()=='/denyaccess'){$scope.fetchKinstoDenyAccess();}
-	if($location.path()=='/makeassistadmin'){$scope.fetchKinstoAssistAdmin();}
+	if($location.path()=='/deletekin'){if($rootScope.currentUser.role=='admin')$scope.fetchKinstoDelete();}
+	if($location.path()=='/provideaccess'){if($rootScope.currentUser.role=='admin')$scope.fetchKinsforAccess();}
+	if($location.path()=='/denyaccess'){if($rootScope.currentUser.role=='admin')$scope.fetchKinstoDenyAccess();}
+	if($location.path()=='/makeassistadmin'){if($rootScope.currentUser.role=='admin')$scope.fetchKinstoAssistAdmin();}
 	fetchbadges();
 })

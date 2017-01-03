@@ -25,12 +25,15 @@
       <div>
       <img class="circle" ng-show="name" src="resources/images/login-image.jpg">
       <img class="circle center-block" style="height:100px;width:100px;" ng-hide="currentUser.name" src="resources/images/connectkincircle1.png">
+      <img class="circle center-block" style="height:100px;width:100px;" ng-show="currentUser.name" src="resources/dp/{{currentUser.name}}">
       <p ng-hide="currentUser.name">Copyrights 2017</p>
       <span ng-show="currentUser.name"class="white-text name">{{currentUser.name}}</span>
       <span ng-show="currentUser.name"class="white-text email">{{currentUser.post}}</span></div>
     </div></li>
     <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+    <li ng-show="currentUser.name" ><a href="#/uploadpicture" class="waves-effect waves-light btn">Upload Picture</a></li>
     <li ng-show="currentUser.name" ><a href="#/searchjob" class="waves-effect waves-light btn">Job Search</a></li>
+    <li ng-show="currentUser.name" ><a href="#/appliedjob" class="waves-effect waves-light btn">Applied Job</a></li>
     <li ng-show="currentUser.role=='admin'" ><a href="#/adminfunctions" class="waves-effect waves-light btn">Admin functions</a></li>
     <li><a href="#!">Second Link</a></li>
     <li><div class="divider"></div></li>

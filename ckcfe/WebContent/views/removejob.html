@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
+	<script src="resources/materialize/js/materialize.min.js"/></script>
+<style>
+body{
+  background: url(resources/images/reactive-recruitment.jpg) no-repeat;
+  background-size:cover;
+  }
+ </style> 
+</head>
+<body>
+<div class="row">
+
+		<div class="input-field col s12 m6 l4 offset-m3 offset-l4 ">
+          <input id="icon_prefix" type="text" class="validate" ng-model="searchText">
+          <label for="icon_prefix">Search</label>
+        </div>
+        
+<div class="col s4 m6 l6 offset-s4 offset-m3 offset-l3">
+<ul class="collapsible"  data-collapsible="accordion">
+    <li ng-repeat="job in jobs | filter:searchText" >
+      <div class="collapsible-header"><i class="material-icons">work</i>{{job.jobtitle}}<span class="btn waves-effect waves-light red right" ng-click="removejob(job.id)">remove</span></div>
+      <div class="collapsible-body grey lighten-4">
+      <div style="margin-left:10px;">
+      	Title: {{job.jobtitle}}<br>
+      	Job Description: {{job.jd}}<br>
+      	Job Specification: {{job.js}}<br> 
+      	Skills Required: {{job.skills}}<br>
+      	Salary: {{job.salary}}<br>
+      	Location: {{job.location}}<br>
+      	Notice: {{job.notice}}<br>
+      	<div class="right-align">
+      	Posted on: {{job.postedon | date:'MM/dd/yyyy'}}<br>
+      	Postedby: {{job.postedby}}<br>
+      	</div>      
+      </div>
+      </div>
+    </li>
+</ul>
+</div>
+</div>
+<script>
+$(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+</script>        
+
+</body>
+</html>

@@ -5,13 +5,14 @@ app.controller('KinController',function($http,$scope,$rootScope,$location,$cooki
 	$scope.errore={code:'',message:''};
 	$scope.mess;
 	
+
 	//signup code
 	$scope.save=function(){
-		console.log('Signup controller enabled')
 		KinService.saveKin($scope.kin).then(
 		function(d){
+			console.log('kin saved')
 			console.log(d.status);
-			$location.path("/login");
+			$location.path("/iuploadpicture");
 		}	
 		);
 	}

@@ -11,6 +11,12 @@ app.config(function($routeProvider) {
 		controller:'KinController',
 		templateUrl:'views/login.html'
 	})
+	.when('/iuploadpicture',{
+		templateUrl:'views/iuploadpicture.html'
+	})
+	.when('/uploadpicture',{
+		templateUrl:'views/uploadpicture.html'
+	})
 	.when('/adminfunctions',{
 		controller:'AdminController',
 		templateUrl:'views/adminfunctions.html'
@@ -22,6 +28,10 @@ app.config(function($routeProvider) {
 	.when('/denyaccess',{
 		controller:'AdminController',
 		templateUrl:'views/denyaccess.html'
+	})
+	.when('/changerole',{
+		controller:'AdminController',
+		templateUrl:'views/changerole.html'
 	})
 	.when('/makeassistadmin',{
 		controller:'AdminController',
@@ -35,9 +45,25 @@ app.config(function($routeProvider) {
 		controller:'JobController',
 		templateUrl:'views/postjob.html' 
 	})
+	.when('/jobdetails',{
+		controller:'JobController',
+		templateUrl:'views/jobdetails.html' 
+	})
 	.when('/searchjob',{
 		controller:'JobController', 
 		templateUrl:'views/jobsearch.html' 
+	})
+	.when('/appliedjob',{
+		controller:'JobController', 
+		templateUrl:'views/appliedjob.html' 
+	})
+	.when('/appliedjobdetails',{
+		controller:'JobController', 
+		templateUrl:'views/appliedjobdetails.html' 
+	})
+	.when('/removejob',{
+		controller:'JobController', 
+		templateUrl:'views/removejob.html' 
 	})
 	.when('/', {
 		templateUrl : 'views/home.html'
@@ -52,10 +78,10 @@ app.config(function($routeProvider) {
 		
 		$rootScope.logout=function(){
 		console.log('logout function');
-		delete $rootScope.currentUser;
-		$cookieStore.remove('currentUser')
 		KinService.logout().then(function(response){
 			console.log("logged out successfully..");
+			delete $rootScope.currentUser;
+			$cookieStore.remove('currentUser');
 			$location.path('/login');
 			},
 			

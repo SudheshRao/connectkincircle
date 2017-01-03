@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
+	<script src="resources/materialize/js/materialize.min.js"/></script>
+<style>
+body{
+  background: url(resources/images/reactive-recruitment.jpg) no-repeat;
+  background-size:cover;
+  }
+ </style> 
+</head>
+<body>
+<div class="row container">
+      <div class="col s12 m12 l12">
+        <div class="card-panel teal">
+        <div style="margin-left:10px;">
+        <div ng-repeat="job in jb">
+        <div ng-show="job.id==sjid">
+      	Title: {{job.jobtitle}}<br>
+      	Job Description: {{job.jd}}<br>
+      	Job Specification: {{job.js}}<br> 
+      	Skills Required: {{job.skills}}<br>
+      	Salary: {{job.salary}}<br>
+      	Location: {{job.location}}<br>
+      	Notice: {{job.notice}}<br>
+      	<div class="right-align">
+      	Posted on: {{job.postedon | date:'MM/dd/yyyy'}}<br>
+      	Postedby: {{job.postedby}}<br>
+      	</div>
+      	</div>
+      	</div> 
+      	</div></div>
+      	<div class="col s12 m6 l4">
+        <div class="card-panel grey">
+          <div class="input-field col s12 m12 l12 white-text ">
+          <input id="icon_prefix" type="text" class="validate white-text" ng-model="searchText">
+          <label for="icon_prefix" class="white-text">Search</label>
+        </div> 
+        <div class="row">
+        <div class="col s8 m8 l8">Name</div>
+        <div class="col s4 m4 l4">id</div>
+        </div>
+        <div ng-repeat="jd in ajd | filter:searchText" class="white-text" >
+        <div class="row" >
+        <div class="col s8 m8 l8">{{jd.kin}}</div>
+        <div class="col s4 m4 l4">{{jd.kinid}}</div>
+        </div> 
+        </div>   
+        </div>
+      </div>
+    </div>
+</div>
+</body>
+</html>
+
+

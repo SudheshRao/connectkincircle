@@ -16,7 +16,9 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import sudhesh.model.Job;
+import sudhesh.model.JobApplied;
 import sudhesh.model.Kin;
+import sudhesh.model.UploadFile;
 
 
 
@@ -69,6 +71,8 @@ public class DBConfig {
    sessionBuilder.addProperties(getHibernateProperties());
 	sessionBuilder.addAnnotatedClass(Kin.class);
 	sessionBuilder.addAnnotatedClass(Job.class);
+	sessionBuilder.addAnnotatedClass(UploadFile.class);
+	sessionBuilder.addAnnotatedClass(JobApplied.class);
 			
 	return sessionBuilder.buildSessionFactory();
 	
