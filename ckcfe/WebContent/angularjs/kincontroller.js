@@ -24,7 +24,7 @@ app.controller('KinController',function($http,$scope,$rootScope,$location,$cooki
 			$scope.kin=response.data;
 			$rootScope.currentUser=$scope.kin;
 			$cookieStore.put('currentUser',$rootScope.currentUser);
-			$location.path("/");},
+			$location.path("/landingpage");},
 			function(response){
 				 $scope.errore=response.data;
 				  $scope.mess=$scope.errore;

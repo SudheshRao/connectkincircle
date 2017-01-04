@@ -13,7 +13,26 @@
       
 
 	<title>KinCircle</title>
-		 
+	<style>
+	::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+}
+	
+	
+	</style>	 
 </head>
 <body ng-app="myApp">
 
@@ -34,21 +53,25 @@
     <li ng-show="currentUser.name" ><a href="#/uploadpicture" class="waves-effect waves-light btn">Upload Picture</a></li>
     <li ng-show="currentUser.name" ><a href="#/searchjob" class="waves-effect waves-light btn">Job Search</a></li>
     <li ng-show="currentUser.name" ><a href="#/appliedjob" class="waves-effect waves-light btn">Applied Job</a></li>
+    <li ng-show="currentUser.name" ><a href="#/searchkin" class="waves-effect waves-light btn">Search Kin</a></li>
+    <li ng-show="currentUser.name" ><a href="#/pendingrequest" class="waves-effect waves-light btn">Connect Requests</a></li>
     <li ng-show="currentUser.role=='admin'" ><a href="#/adminfunctions" class="waves-effect waves-light btn">Admin functions</a></li>
     <li><a href="#!">Second Link</a></li>
     <li><div class="divider"></div></li>
     <li><a class="subheader">Subheader</a></li>
     <li ng-show="currentUser.name"><a class="waves-effect" ng-click="logout()"><i class="material-icons">exit_to_app</i><span>logout</span></a></li>
   </ul></div>
-  <a href="#" style="margin:10px;"  data-activates="slide-out" class="button-collapse btn-floating btn-large waves-effect waves-light red"><i style="font-size:30px;" class="material-icons">menu</i></a>
-  <a  style="margin:10px;" ng-show="currentUser.name" ng-click="logout()" class="right  btn-floating btn-large waves-effect waves-light"><i style="font-size:30px;" class="material-icons">exit_to_app</i></a>
+  <a href="#" style="margin:10px;"  data-activates="slide-out" class=" hoverable button-collapse btn-floating waves-effect waves-light red"><i style="font-size:30px;" class="material-icons">menu</i></a>
+  <a  style="margin:10px;" ng-show="currentUser.name" ng-click="logout()" class="right hide-on-small-only hoverable btn-floating waves-effect waves-light"><i style="font-size:30px;" class="material-icons">exit_to_app</i></a>
    
    <div ng-view></div>      
 
  <script>
  $(".button-collapse").sideNav({
 	 closeOnClick: true,
-	 edge: 'left'
+	 edge: 'left',
+     draggable: true // Choose
+
 	 });
  $('.collapsible').collapsible();     
  </script>
@@ -64,6 +87,8 @@
 <script src="angularjs/adminservice.js"></script>
 <script src="angularjs/jobcontroller.js"></script>
 <script src="angularjs/jobservice.js"></script>
+<script src="angularjs/connectcontroller.js"></script>
+<script src="angularjs/connectservice.js"></script>
       
 </body>
 

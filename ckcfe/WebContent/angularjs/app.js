@@ -11,6 +11,18 @@ app.config(function($routeProvider) {
 		controller:'KinController',
 		templateUrl:'views/login.html'
 	})
+	.when('/landingpage',{
+		controller:'KinController',
+		templateUrl:'views/landingpage.html'
+	})
+	.when('/searchkin',{
+		controller:'ConnectController',
+		templateUrl:'views/searchkin.html'
+	})
+	.when('/pendingrequest',{
+		controller:'ConnectController',
+		templateUrl:'views/pendingrequest.html'
+	})
 	.when('/iuploadpicture',{
 		templateUrl:'views/iuploadpicture.html'
 	})

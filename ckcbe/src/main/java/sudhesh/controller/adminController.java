@@ -14,12 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import sudhesh.DAO.UploadFileDaoImpl;
 import sudhesh.DAO.adminDaoImpl;
 import sudhesh.DAO.kinDAOImpl;
 import sudhesh.model.Badges;
 import sudhesh.model.Kin;
-import sudhesh.model.UploadFile;
 
 @Controller
 public class AdminController {
