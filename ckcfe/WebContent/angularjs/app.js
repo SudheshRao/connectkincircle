@@ -10,84 +10,51 @@ app.config(function($routeProvider) {
 	
 	.when('/login',{controller:'KinController',templateUrl:'views/login.html'})//login page route
 	
-	.when('/landingpage',{
-		controller:'KinController',
-		templateUrl:'views/landingpage.html'
-	})
-	.when('/searchkin',{
-		controller:'ConnectController',
-		templateUrl:'views/searchkin.html'
-	})
-	.when('/kinconnects',{
-		controller:'ConnectController',
-		templateUrl:'views/kinconnects.html'
-	})
-	.when('/pendingrequest',{
-		controller:'ConnectController',
-		templateUrl:'views/pendingrequest.html'
-	})
-	.when('/iuploadpicture',{
-		templateUrl:'views/iuploadpicture.html'
-	})
-	.when('/uploadpicture',{
-		templateUrl:'views/uploadpicture.html'
-	})
-	.when('/adminfunctions',{
-		controller:'AdminController',
-		templateUrl:'views/adminfunctions.html'
-	})
-		.when('/provideaccess',{
-		controller:'AdminController',
-		templateUrl:'views/provideaccess.html'
-	})
-	.when('/denyaccess',{
-		controller:'AdminController',
-		templateUrl:'views/denyaccess.html'
-	})
-	.when('/changerole',{
-		controller:'AdminController',
-		templateUrl:'views/changerole.html'
-	})
-	.when('/makeassistadmin',{
-		controller:'AdminController',
-		templateUrl:'views/makeassistadmin.html'
-	})
-	.when('/deletekin',{
-		controller:'AdminController', 
-		templateUrl:'views/deletekin.html' 
-	})
-	.when('/postjob',{
-		controller:'JobController',
-		templateUrl:'views/postjob.html' 
-	})
-	.when('/jobdetails',{
-		controller:'JobController',
-		templateUrl:'views/jobdetails.html' 
-	})
-	.when('/searchjob',{
-		controller:'JobController', 
-		templateUrl:'views/jobsearch.html' 
-	})
-	.when('/appliedjob',{
-		controller:'JobController', 
-		templateUrl:'views/appliedjob.html' 
-	})
-	.when('/appliedjobdetails',{
-		controller:'JobController', 
-		templateUrl:'views/appliedjobdetails.html' 
-	})
-	.when('/removejob',{
-		controller:'JobController', 
-		templateUrl:'views/removejob.html' 
-	})
+	.when('/landingpage',{controller:'KIController',templateUrl:'views/landingpage.html'})//kin info page route
+	
+	.when('/searchkin',{controller:'ConnectController',templateUrl:'views/searchkin.html'})//search for kin route
+	
+	.when('/kinconnects',{controller:'ConnectController',templateUrl:'views/kinconnects.html'})//kin connected page route
+	
+	.when('/pendingrequest',{controller:'ConnectController',templateUrl:'views/pendingrequest.html'})//pendin request page route
+	
+	.when('/iuploadpicture',{templateUrl:'views/iuploadpicture.html'})//initial dp upload route
+	
+	.when('/uploadpicture',{templateUrl:'views/uploadpicture.html'})//change dp route
+	
+	.when('/searchjob',{controller:'JobController',templateUrl:'views/jobsearch.html'})//job search page route
+	
+	.when('/appliedjob',{controller:'JobController',templateUrl:'views/appliedjob.html'})//list of applied job page route
+	
+	//Admin Functions routes 
+	
+	.when('/adminfunctions',{controller:'AdminController',templateUrl:'views/adminfunctions.html'})//admin functions page route 
+	
+	.when('/provideaccess',{controller:'AdminController',templateUrl:'views/provideaccess.html'})//access provision page route
+	
+	.when('/denyaccess',{controller:'AdminController',templateUrl:'views/denyaccess.html'})//deny access page route
+	
+	.when('/changerole',{controller:'AdminController',templateUrl:'views/changerole.html'})//change role page route
+	
+	.when('/makeassistadmin',{controller:'AdminController',templateUrl:'views/makeassistadmin.html'})//make assist admin page route
+	
+	.when('/deletekin',{controller:'AdminController', templateUrl:'views/deletekin.html'})//delete kin page route
+	
+	.when('/postjob',{controller:'JobController',templateUrl:'views/postjob.html'})//post job form page route
+	
+	.when('/jobdetails',{controller:'JobController',templateUrl:'views/jobdetails.html'})//job details page route
+	
+	.when('/appliedjobdetails',{controller:'JobController',templateUrl:'views/appliedjobdetails.html'})//job details including applied kin page route
+	
+	.when('/removejob',{controller:'JobController',templateUrl:'views/removejob.html'})// remove job page route
 	
 })
+
 	app.run(function($cookieStore,$rootScope,$location,KinService){  
 		console.log('app.run');
 
 	if($rootScope.currentUser==undefined)
 		$rootScope.currentUser=$cookieStore.get('currentUser')
-		
 		$rootScope.logout=function(){
 		console.log('logout function');
 		KinService.logout().then(function(response){

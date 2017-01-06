@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	
 	<!-- jquery import -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	
 	<!-- materialize css and material fonts import -->
 	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
@@ -46,14 +46,16 @@
 		<div class="nav-wrapper container">
 		
 		<!-- brand name visible only on large devices -->
-		<a href="#/landingpage" class="brand-logo black-text hide-on-med-and-down">Connect Kin Circle</a>
+		<a href="#/" ng-hide="currentUser.name" class="brand-logo black-text hide-on-med-and-down">Connect Kin Circle</a>
+		<!-- display name when logged in -->
+		<a href="#/landingpage" ng-show="currentUser.name" class="brand-logo black-text hide-on-med-and-down">{{currentUser.name}}</a>
 		
 		<!-- links for chat, notification, pending requests and settings-->
 		<ul class="right" >
-			<li style="width:50px;"><a  data-activates="slide-t" onclick="Chat()" class="button-collaps black-text show-on-large"><i class="material-icons">chat</i></a></li>        
-			<li style="width:50px;"><a  data-activates="slide-t" onclick="Notification()" class="button-collaps black-text show-on-large"><i class="material-icons">notifications</i></a></li>        
-			<li style="width:50px;"><a  data-activates="slide-t" onclick="FriendRequest()" class="button-collaps black-text show-on-large"><i class="material-icons">people</i></a></li>        
-			<li style="width:50px;"><a  data-activates="slide-t" onclick="Settings()" class="button-collaps black-text show-on-large"><i class="material-icons">settings</i></a></li>        
+			<li ng-show="currentUser.name" style="width:50px;"><a  data-activates="slide-t" onclick="Chat()" class="button-collaps black-text show-on-large"><i class="material-icons">chat</i></a></li>        
+			<li ng-show="currentUser.name" style="width:50px;"><a  data-activates="slide-t" onclick="Notification()" class="button-collaps black-text show-on-large"><i class="material-icons">notifications</i></a></li>        
+			<li ng-show="currentUser.name" style="width:50px;"><a  data-activates="slide-t" onclick="FriendRequest()" class="button-collaps black-text show-on-large"><i class="material-icons">people</i></a></li>        
+			<li ng-show="currentUser.name" style="width:50px;"><a  data-activates="slide-t" onclick="Settings()" class="button-collaps black-text show-on-large"><i class="material-icons">settings</i></a></li>        
 		</ul>
 		
 		</div>

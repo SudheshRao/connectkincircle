@@ -1,14 +1,14 @@
 app.controller('JobController',function($scope,$location,$rootScope,JobService){
 	$scope.job={id:'',jobtitle:'',jd:'',js:'',skills:'',salary:'',loctaion:'',notice:'',postedon:'',postedby:'',postedbyId:''};
 	$scope.jobs;
+	$scope.ajd;
 	
+	//save job
 	$scope.saveJob=function(){
-		console.log('entering post job in job controller');
-
+		console.log('save job invoked');
 		JobService.saveJob($scope.job)
 		.then(function(response){
-			console.log("successfully inserted job details");
-			alert("Posted job successfully");
+			console.log("job inserted");
 			$location.path('/searchjob');
 		},function(response){
 			console.log("failure " +response.status);
@@ -19,50 +19,50 @@ app.controller('JobController',function($scope,$location,$rootScope,JobService){
 			console.log(response.data.message)
 			$location.path('/postJob')
 			}
-		})
+		});
 	}
 	
+	//remove job by admin
 	$scope.removejob=function(id){
-		console.log('entering remove job in job controller');
-
+		console.log('remove job invoked(admin)');
 		JobService.removejob(id)
 		.then(function(response){
 			getAllJobs();
-			alert("Removed job successfully");
 			$location.path('/removejob');
 		})
 	}
 	
+	//remove job
 	$scope.jobremove=function(id){
-		console.log('entering remove job in job controller'+id);
-
+		console.log('job remove invoked');
 		JobService.jobremove(id)
 		.then(function(response){
-			alert("Removed job successfully");
 			$scope.fetchAppliedJob();
 		})
 	}
 	
+	//fetch applied job
 	$scope.fetchAppliedJob=function(){
-		console.log('entering search applied job in job controller');
-
+		console.log('fetch applied job invoked');
 		JobService.fetchAppliedJob()
 		.then(function(response){
-			$rootScope.ja=response.data;
+			$scope.jobs=response.data;
 			$location.path('/appliedjob');
 		})
 	}
+	
+	//apply for a job
 	$scope.applyjob=function(id){
-		console.log('entering apply job in job controller');
-
+		console.log('apply job invoked');
 		JobService.applyjob(id)
 		.then(function(response){
 			$scope.fetchAppliedJob();
 		})
 	}
 	
+	//kins applied job details
 	$scope.appliedjobdetails=function(id){
-		console.log('entering search applied job in job controller');
+		console.log('applied no jon details invoked');
 		$rootScope.sjid=id;
 		JobService.appliedjobdetails(id)
 		.then(function(response){
@@ -71,6 +71,7 @@ app.controller('JobController',function($scope,$location,$rootScope,JobService){
 		})
 	}
 	
+	//getalljobs
 	function getAllJobs(){
 		console.log('entering get All jobs')
 		JobService.getAllJobs()

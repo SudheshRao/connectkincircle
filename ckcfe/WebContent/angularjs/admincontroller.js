@@ -7,156 +7,138 @@ app.controller('AdminController',function($http,$scope,$rootScope,$route,$locati
 
 	//fetch kins for access provision
 	$scope.fetchKinsforAccess=function(){
-		console.log('entering fetch kins for access in controller')
+		console.log('fetch kin for access invoked');
 		AdminService.fetchKinsforAccess()
 		.then(
 				function(response){
 					$scope.kins=response.data;
-					$rootScope.ap=$scope.kins;
 					$location.path("/provideaccess");
 				},
 				function(error){
 					console.log(error);
-				}
-		)
+				});
 	}
 	
 	//fetch kins to deny access provision
 	$scope.fetchKinstoDenyAccess=function(){
-		console.log('entering fetch kins to  deny access in controller')
+		console.log('fetch kins to deny access invoked');
 		AdminService.fetchKinstoDenyAccess()
 		.then(
 				function(response){
 					$scope.kins=response.data;
-					$rootScope.ad=$scope.kins;
 					$location.path("/denyaccess");
 				},
 				function(error){
 					console.log(error);
-				}
-		)
+				});
 	}
 	
 	//fetch kins to change role
 	$scope.fetchKinstoChangeRole=function(){
-		console.log('entering fetch kins to  change role in controller')
-		AdminService.fetchKinstoDenyAccess()
+		console.log('fetch kins to  change role invoked');
+		AdminService.fetchKinstoDenyAccess()//fetches response required for changerole
 		.then(
 				function(response){
 					$scope.kins=response.data;
-					$rootScope.cr=$scope.kins;
 					$location.path("/changerole");
 				},
 				function(error){
 					console.log(error);
-				}
-		)
+				});
 	}
 	
 	//fetch kins to delete
 	$scope.fetchKinstoDelete=function(){
-		console.log('entering fetch kins to  delete in controller')
-		AdminService.fetchKinstoDenyAccess()
+		console.log('fetch kins to  delete invoked');
+		AdminService.fetchall()
 		.then(
 				function(response){
 					$scope.kins=response.data;
-					$rootScope.dk=$scope.kins;
 					$location.path("/deletekin");
 				},
 				function(error){
 					console.log(error);
-				}
-		)
+				});
 	}
 	
 	//fetch kins to make kin assist admin
 	$scope.fetchKinstoAssistAdmin=function(){
-		console.log('entering fetch kins to make him assist admin in controller')
+		console.log('fetch kins to makeassist admin invoked');
 		AdminService.fetchKinstoAssistAdmin()
 		.then(
 				function(response){
 					$scope.kins=response.data;
-					$rootScope.aa=$scope.kins;
-					console.log($rootScope.aa);
 					$location.path("/makeassistadmin");
 				},
 				function(error){
 					console.log(error);
-				}
-		)
+				});
 	}
 	
 	//permit kins access
-	$scope.permit=function(kino){
-		console.log('entering permit kin.s access in controller');
-		$scope.kin=kino;
-		AdminService.permit($scope.kin).then( function(o){
-		$scope.fetchKinsforAccess().then(function(p){
-			$location.path("/provideaccess")
-		})})
+	$scope.permit=function(kin){
+		console.log('permit invoked');
+		AdminService.permit(kin).then( function(o){
+		$scope.fetchKinsforAccess();
+		});
 	}
 	
 	//deny kins access
-	$scope.deny=function(kino){
-		console.log('entering deny kin.s access in controller');
-		$scope.kin=kino;
-		AdminService.deny($scope.kin).then( function(d){
-		$scope.fetchKinsforAccess().then(function(b){
-			$location.path("/provideaccess")
-		})})
-		
+	$scope.deny=function(kin){
+		console.log('deny invoked');
+		AdminService.deny(kin).then( function(d){
+		$scope.fetchKinsforAccess();
+		});
 	}
 	
 	//delete kin
 	$scope.deletekin=function(id){
-		console.log('entering delete kin in controller');
+		console.log('delete invoked');
 		AdminService.deletekin(id).then( function(d){
 		$scope.fetchKinstoDelete();
 		})
-		
 	}
+	
 	//deny temporarily kins access
-	$scope.denytemp=function(kino){
-		console.log('entering deny kin.s access temporarily in controller');
-		$scope.kin=kino;
-		AdminService.denytemp($scope.kin).then( function(d){
-		$scope.fetchKinstoDenyAccess().then(function(b){
-			$location.path("/denyaccess")
-		})})
-		
+	$scope.denytemp=function(kin){
+		console.log('temporary deny invoked');
+		AdminService.denytemp(kin).then( function(d){
+		$scope.fetchKinstoDenyAccess();
+		});
 	}
 	
 	//make assist admin
 	$scope.makeassistadmin=function(id){
-		console.log('entering make assist admin in controller');
+		console.log('make assist admin invoked');
 		AdminService.makeassistadmin(id).then( function(q){
-		$scope.fetchKinstoAssistAdmin()})
+		$scope.fetchKinstoAssistAdmin();
+		});
 	}
 	
 	//change kins role
-	$scope.changerole=function(kino){
-		$scope.kin=kino;
-		console.log('entering make assist admin in controller');
-		AdminService.kcr($scope.kin).then(function(){
-			$scope.fetchKinstoChangeRole()
-		})
+	$scope.changerole=function(kin){
+		console.log('change role invoked');
+		AdminService.kcr(kin).then(function(){
+			$scope.fetchKinstoChangeRole();
+		});
 	}
 	
 	//fetching badges for external info
 	function fetchbadges(){
-		console.log("fetching badges in controller");
+		console.log("fetching badges...");
 		AdminService.fetchbadges()
 		.then(
 				function(response){
 					$scope.badges=response.data;
-					$rootScope.badge=$scope.badges;
-					})
+					});
 	}
 	
 	//refresh compensator
 	if($location.path()=='/deletekin'){if($rootScope.currentUser.role=='admin')$scope.fetchKinstoDelete();}
 	if($location.path()=='/provideaccess'){if($rootScope.currentUser.role=='admin')$scope.fetchKinsforAccess();}
 	if($location.path()=='/denyaccess'){if($rootScope.currentUser.role=='admin')$scope.fetchKinstoDenyAccess();}
+	if($location.path()=='/changerole'){if($rootScope.currentUser.role=='admin')$scope.fetchKinstoChangeRole();}
 	if($location.path()=='/makeassistadmin'){if($rootScope.currentUser.role=='admin')$scope.fetchKinstoAssistAdmin();}
-	fetchbadges();
+	if($location.path()=='/adminfunctions'){if($rootScope.currentUser.role=='admin')fetchbadges();}
+	
 })

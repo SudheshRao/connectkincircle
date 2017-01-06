@@ -1,64 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	
+	<!-- jquery import -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	
+	<!-- materialize css and material fonts import -->
 	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
 	<script src="resources/materialize/js/materialize.min.js"/></script>
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   
 <style>
-body{
-background:url(resources/images/689697.jpg);
-background-size:cover;
-background-repeat:no-repeat;
-}
+	body{
+		background:url(resources/images/689697.jpg);
+		background-size:cover;
+		background-repeat:no-repeat;}
 </style>
+
 </head>
 <body>
-  
-  <div class="row">
-    <div class="input-field col s12 m6 l4 offset-m3 offset-l4 ">
-          <input id="icon_prefix" type="text" class="validate" ng-model="searchText">
-          <label for="icon_prefix">Search</label>
-        </div>
-   <div ng-repeat="kin in ap | filter:searchText">
-   
-   <div class="col s12 m4 l3">
-  	<div class="card sticky-action hoverable" >
-    <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator cirlce center-block" src="resources/dp/{{kin.name}}">
-    </div>
-    <div class="card-content">
-      <span class="card-title activator grey-text text-darken-4">{{kin.name}}<i class="material-icons right">more_vert</i></span>
-    </div>
-    <div class="card-action blue"><a ng-click="permit(kin)" class="waves-effect waves-light btn">Permit</a> <a ng-click="deny(kin)"class="waves-effect waves-light btn red">Deny</a></div>
-    <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">{{kin.name}}<i class="material-icons right">close</i></span>
-      <p>Post : {{kin.post}}</p>
-      <p>Role : {{kin.role}}</p>
-      <p>E-mail : {{kin.email}}</p>
-      <p>Ph.No : {{kin.phoneno}}</p>
-      <p>DoB : {{kin.dob}}</p>
-      <p>Gender : {{kin.gender}}</p>    
-    </div>
-    </div>
-    </div>
-  </div>
-	</div>  
-	<script>
-	app.directive('checkImage', function($http) {
-		console.log("directive");
-	    return {
-	        restrict: 'A',
-	        link: function(scope, element, attrs) {
-	            attrs.$observe('ngSrc', function(ngSrc) {
-	                $http.get(ngSrc).success(function(){
-	                }).error(function(){
-	                    element.attr('src', 'resources/images/connectkincircle1.png'); // set default image
-	                });
-	            });
-	        }
-	    };
-	})
-	</script>
+	
+	<!-- search -->
+	<div class="row">
+		<div class="input-field col s12 m6 l4 offset-m3 offset-l4 ">
+		<input id="icon_prefix" type="text" class="validate" ng-model="searchText">
+		<label for="icon_prefix">Search</label>
+		</div>
+	</div>
+	
+	<!-- access provision cards -->
+	<div class="row">
+	<div ng-repeat="kin in kins | filter:searchText"> 
+	
+	<div class="col s12 m4 l3"><div class="card sticky-action hoverable" >
+	
+	<div class="card-image waves-effect waves-block waves-light">
+		<img class="activator cirlce center-block" src="resources/dp/{{kin.name}}">
+	</div>
+	
+	<div class="card-content">
+		<span class="card-title activator grey-text text-darken-4">{{kin.name}}<i class="material-icons right">more_vert</i></span>
+	</div>
+	
+	<div class="card-action blue"><a ng-click="permit(kin)" class="waves-effect waves-light btn">Permit</a> <a ng-click="deny(kin)"class="waves-effect waves-light btn red">Deny</a></div>
+	
+	<div class="card-reveal">
+		<span class="card-title grey-text text-darken-4">{{kin.name}}<i class="material-icons right">close</i></span>
+		<p>Post : {{kin.post}}</p>
+		<p>Role : {{kin.role}}</p>
+		<p>E-mail : {{kin.email}}</p>
+		<p>Ph.No : {{kin.phoneno}}</p>
+		<p>DoB : {{kin.dob}}</p>
+		<p>Gender : {{kin.gender}}</p>
+	</div>
+	
+	</div></div>
+	
+	</div>
+	</div>
+	
 </body>
 </html>
