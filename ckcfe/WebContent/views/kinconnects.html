@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
+	<script src="resources/materialize/js/materialize.min.js"/></script>
+<style>
+</style>
+</head>
+<body>
+ <div class="row">
+ <div ng-repeat="k in ckins">
+        <div class="col s12 m4 l3">
+          <div class="card horizontal">
+      <div class="card-image">
+                  <img class="responsive-img" src="resources/dp/{{k.name}}">
+      </div>
+      <div class="card-stacked">
+            <div class="card-content">
+              <p><strong>{{k.name}}</strong></p>
+              <p>Post : {{k.post}}</p>
+              <p>Role : {{k.role}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>  
+</body>
+</html>

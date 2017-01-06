@@ -1,27 +1,18 @@
 app.factory('KinService',function($http){
+	
 	var BASE_URL="http://localhost:8080/ckcbe/";
 	//instantiation
 	var kinService=this;
 	
-	kinService.saveKin=function(kin){
-		console.log('entering save person in service')
-		return $http.post(BASE_URL + "/Kin",kin)
-		.then(function(response){
-			console.log(response.status)
-			console.log(response.headers)
-			return response.status
-		},function(reponse){
-			console.log(response.status)
-			return response.status
-		})
+	kinService.signup=function(kin){console.log('signup service invoked');
+		return $http.post(BASE_URL + "/signup",kin);
 	}
-	kinService.authenticate=function(kin){
-		console.log('entering login person in service')
+	
+	kinService.login=function(kin){console.log('login service invoked');
 		return $http.post(BASE_URL + "/login",kin);
 	}
 	
-	kinService.logout=function(){
-		console.log('entering logout person in service')
+	kinService.logout=function(){console.log('logout service invoked');
 		return $http.put(BASE_URL + "/logout");
 	}
 	

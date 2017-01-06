@@ -6,10 +6,20 @@ app.factory('ConnectService',function($http){
 		console.log('service --- friendRequest');
 		return $http.post(BASE_URL+ '/connectrequest',name);
 		}	
+
+	connectService.getAllConnects=function(){
+		console.log('service --- friendRequest');
+		return $http.get(BASE_URL + "/getAllConnects");
+	}
 	
 	connectService.pendingrequest=function(){
 		console.log('service --- pending request');
 		return $http.get(BASE_URL + "/pendingrequest")
+	}
+	
+	connectService.updateConnectRequest=function(connectStatus,fromId){
+		console.log('service - update friend request')
+		return $http.put(BASE_URL + "/updateConnectRequest/" + connectStatus +"/"+fromId)
 	}
 	
 		connectService.getAllKins=function(){

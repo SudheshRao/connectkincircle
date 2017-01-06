@@ -47,7 +47,7 @@ public class UploadFileDaoImpl {
 			
 		}
 
-		public void deletpic(UploadFile uploadFile) {
+		public void deletepic(UploadFile uploadFile) {
 			Session session=sessionFactory.getCurrentSession();
 			session.delete(uploadFile);
 			session.flush();

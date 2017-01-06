@@ -31,7 +31,7 @@ public class ConnectDaoImpl {
 
 	public List<Connects> getConnects(String name) {
 		Session session= sessionFactory.getCurrentSession();
-		Query query=session.createQuery("from Connects where (to_id=? or from_id=?) and status=?");
+		Query query=session.createQuery("from Connects where (toId=? or fromId=?) and status=?");
 		query.setString(0, name);
 	      query.setString(1, name);
 	      query.setCharacter(2, 'A');
@@ -74,6 +74,18 @@ public class ConnectDaoImpl {
 	public void savenotification(Notifications notify) {
 		Session session=sessionFactory.getCurrentSession();
 		session.save(notify);
+		session.flush();
+		
+	}
+
+	public void updatePendingRequest(char connectstatus, String fromId, String name) {
+		Session session=sessionFactory.getCurrentSession();
+		Query query=session.createQuery("update Connects set status=? where fromId=? and toId=?");
+		query.setCharacter(0, connectstatus);
+		query.setString(1, fromId);
+		query.setString(2, name);
+		int count=query.executeUpdate();
+		System.out.println("Number of records updated " + count);
 		session.flush();
 		
 	}

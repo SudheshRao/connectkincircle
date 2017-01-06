@@ -13,40 +13,43 @@ public class Notifications {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int nid;
-	private String from;
-	private String to;
-	private String notification;
-	private Date time;
+	private String fromkin;
+	private String tokin;
+	private String notifiy;
+	private Date tim;
+	
 	public int getNid() {
 		return nid;
 	}
 	public void setNid(int nid) {
 		this.nid = nid;
 	}
-	public String getFrom() {
-		return from;
+
+	public String getFromkin() {
+		return fromkin;
 	}
-	public void setFrom(String from) {
-		this.from = from;
+	public void setFromkin(String fromkin) {
+		this.fromkin = fromkin;
 	}
-	public String getTo() {
-		return to;
+	public String getTokin() {
+		return tokin;
 	}
-	public void setTo(String to) {
-		this.to = to;
+	public void setTokin(String tokin) {
+		this.tokin = tokin;
 	}
-	public String getNotification() {
-		return notification;
+	public String getNotifiy() {
+		return notifiy;
 	}
-	public void setNotification(String notification) {
-		this.notification = notification;
+	public void setNotifiy(String notifiy) {
+		this.notifiy = notifiy;
 	}
-	public Date getTime() {
-		return time;
+	public Date getTim() {
+		return tim;
 	}
-	public void setTime(Date time) {
-		this.time = time;
+	public void setTim(Date tim) {
+		this.tim = tim;
 	}
+
 	
 	
 

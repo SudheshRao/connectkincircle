@@ -1,107 +1,117 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	
+	<!-- jquery import -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	
+	<!-- materialize css and material fonts import -->
 	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
 	<script src="resources/materialize/js/materialize.min.js"/></script>
-<style>
-body{
-  background: url(resources/images/homewall.jpg) no-repeat;
-  background-size:cover;
-  }
-      /* label color */
-   .input-field label {
-     color: #000;
-   }
-   /* label focus color */
-   .input-field input[type=text]:focus + label {
-     color: #000;
-   }
-   /* label underline focus color */
-   .input-field input[type=text]:focus {
-     border-bottom: 1px solid #000;
-     box-shadow: 0 1px 0 0 #000;
-   }
-   .input-field input[type=password]:focus + label {
-     color: #000;
-   }
-   /* label underline focus color */
-   .input-field input[type=password]:focus {
-     border-bottom: 1px solid #000;
-     box-shadow: 0 1px 0 0 #000;
-   }
-
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
-</style>
+<style>
+	body{
+		background: url(resources/images/homewall.jpg) no-repeat;
+		background-size:cover;}
 
-<title>Insert title here</title>
+	/*form styles*/
+	/* label color */
+	.input-field label {color: #000;}
+	
+	/* label focus color */
+	.input-field input[type=text]:focus + label {color: #000;}
+	
+	/* label underline focus color */
+	.input-field input[type=text]:focus {border-bottom: 1px solid #000;box-shadow: 0 1px 0 0 #000;}
+	
+	.input-field input[type=password]:focus + label {color: #000;}
+	
+	/* label underline focus color */
+	.input-field input[type=password]:focus {border-bottom: 1px solid #000;box-shadow: 0 1px 0 0 #000;}
+</style>
 </head>
 <body>
 
 	<div class="container">
-		<h1 class="center-align">
-      <strong>Welcome.</strong> Please Signup.</h1>
-			
+		
+	<!-- header -->	
+	<h1 class="center-align"><strong>Welcome.</strong> Please Signup.</h1>
+	
+	<!-- print error message -->
+		<div id="div" ng-show="errore.message" class="container center-align"><h5>{{errore.message}}</h5></div>
+	<!-- form -->		
 	<form class="container" method="post">
 	
 		<div class="row">
-        <div class="input-field col s6 ">
-          <input id="icon_prefix" type="text" class="validate" ng-model="kin.name"   pattern=".{4,15}" required="required">
-          <label for="icon_prefix">Name</label>
-        </div>
-        <div class="input-field col s6 ">
-          <input id="icon_prefix" type="text" class="validate" ng-model="kin.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Please enter a valid email" required>
-          <label for="icon_prefix">E-mail</label>
-        </div>
-        <div class="input-field col s6 ">
-		  <input id="icon_prefix" type="text" class="validate" ng-model="kin.phoneno" pattern="^\d{10}$" title="Please enter a valid number" required>
-          <label for="icon_prefix">Phone No.</label>
-        </div>
-        <div class="input-field col s6 ">
-		  <input id="icon_prefix" type="date" ng-model="kin.dob" >
-          <label for="icon_prefix"></label>
-        </div>
-         <div class="input-field col s6 ">
-		  <input id="icon_prefix" type="password" class="validate" ng-model="kin.password" pattern=".{8,}"  required>
-          <label for="icon_prefix">Password</label>
-        </div>
-        <div class="input-field col s6 ">
-		  <input id="icon_prefix" type="password" class="validate" ng-model="kin.confirmpassword" pattern=".{8,}" title="Should match the above password" required>
-          <label for="icon_prefix">Confirm Password</label>
-        </div>
-        <div class="input-field col s6">
-		  <input id="icon_prefix" type="password" class="validate" ng-model="kin.post" required>
-          <label for="icon_prefix">Post</label>
-        </div>
-        <div class="col s12"><label style="font-size:15px;color:black">Gender:</label> 
-		<input type="radio" name="gender" ng-model="kin.gender" value="Male"  id="male" required> <label for="male">Male</label>
-		<input type="radio" name="gender" ng-model="kin.gender" value="Female"  id="female" > <label for="female">Female</label>
+		
+		<div class="input-field col s6 ">
+			<input id="name" type="text" class="validate" ng-model="kin.name"   pattern=".{4,15}" required="required">
+			<label for="name">Name</label>
 		</div>
-
-        <div class="col s12 "><label style="font-size:15px;color:black">Role:</label>
-		<input type="radio" name="role" ng-model="kin.role" value="Employee" id="employee" required> <label for="employee">Employee</label>
-		<input type="radio" name="role" ng-model="kin.role" value="Contractor" id="contractor"> <label for="contractor">Contractor</label>
-		<input type="radio" name="role" ng-model="kin.role" value="Intern" id="intern"> <label for="intern">Intern</label>
-		<input type="radio" name="role" ng-model="kin.role" value="Student" id="student"> <label for="student">Student</label>
+		
+		<div class="input-field col s6 ">
+			<input id="email" type="text" class="validate" ng-model="kin.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Please enter a valid email" required>
+			<label for="email">E-mail</label>	
 		</div>
-		 
-        </div>
-
-		<a id="yourID" style="margin-top:5px;" class="waves-effect waves-light btn"  type="submit" ng-click="save()"><i class="material-icons left">person_add</i>Signup</a>
- <div id="preloader" class=" container progress">
-        <div class="center indeterminate"></div>
-        </div>
+		
+		<div class="input-field col s6 ">
+			<input id="phno" type="text" class="validate" ng-model="kin.phoneno" pattern="^\d{10}$" title="Please enter a valid number" required>
+			<label for="phno">Phone No.</label>
+		</div>
+		
+		<div class="input-field col s6 ">
+			<input id="date" type="date" ng-model="kin.dob" >
+			<label for="date"></label>
+		</div>
+		
+		<div class="input-field col s6 ">
+			<input id="pswd" type="text" class="validate" ng-model="kin.password" pattern=".{8,}"  required>
+			<label for="pswd">Password</label>
+		</div>
+		
+		<div class="input-field col s6 ">
+			<input id="cpswd" type="text" class="validate" ng-model="kin.confirmpassword" pattern=".{8,}" title="Should match the above password" required>
+			<label for="cpswd">Confirm Password</label>
+		</div>
+		
+		<div class="input-field col s6">
+			<input id="post" type="text" class="validate" ng-model="kin.post" required>
+			<label for="post">Post</label>
+		</div>
+		
+		<div class="col s12"><label style="font-size:15px;color:black">Gender:</label> 
+			<input type="radio" name="gender" ng-model="kin.gender" value="Male"  id="male" required> <label for="male">Male</label>
+			<input type="radio" name="gender" ng-model="kin.gender" value="Female"  id="female" > <label for="female">Female</label>
+		</div>
+		
+		<div class="col s12 m12"><label style="font-size:15px;color:black">Role:</label>
+		<div class="input-field col m3 s6 center-align"><input type="radio" name="role" ng-model="kin.role" value="Employee" id="employee" required> <label for="employee">Employee</label></div>
+		<div class="input-field col m3 s6 center-align"><input type="radio" name="role" ng-model="kin.role" value="Contractor" id="contractor"> <label for="contractor">Contractor</label></div>
+		<div class="input-field col m3 s6 center-align"><input type="radio" name="role" ng-model="kin.role" value="Intern" id="intern"> <label for="intern">Intern</label></div>
+		<div class="input-field col m3 s6 center-align"><input type="radio" name="role" ng-model="kin.role" value="Student" id="student"> <label for="student">Student</label></div>		
+		</div>
+		
+		</div>
+		
+		<a id="signupf" style="margin-top:5px;" class="waves-effect waves-light btn"  type="submit" ng-click="signup()"><i class="material-icons left">person_add</i>Signup</a>
+        
+		<!-- preloader -->	
+		<div id="preloader" ng-hide="errore.message" class="preloader-wrapper active"><div class="spinner-layer spinner-red-only"><div class="circle-clipper left"><div class="circle"></div></div>
+		<div class="gap-patch"><div class="circle"></div></div>
+		<div class="circle-clipper right"><div class="circle"></div></div></div></div>
+        
 	</form>
+	
 	</div>
 <script>
-$("#preloader").hide();
-$(function(){
-    $("#yourID").on("click",function(){
-        $("#preloader").show();
-    });
-});
+	//jquery initialization to hide preloader
+	$("#preloader").hide();
+	//function to show preloader on click
+	$(function(){$("#signupf").on("click",function(){$("#preloader").show();});});
 </script>
- <script src="resources/theme/js/index.js"></script>
-
 </body>
 </html>

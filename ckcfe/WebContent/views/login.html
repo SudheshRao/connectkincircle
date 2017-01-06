@@ -1,88 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>	
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	
+	<!-- jquery import -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	
+	<!-- materialize css and material fonts import -->
 	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
 	<script src="resources/materialize/js/materialize.min.js"/></script>
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
 <style>
-body{
-  background: url(resources/images/homewall.jpg) no-repeat;
-  background-size:cover;
-  }
-       /* label color */
-   .input-field label {
-     color: #000;
-   }
-   /* label focus color */
-   .input-field input[type=text]:focus + label {
-     color: #000;
-   }
-   /* label underline focus color */
-   .input-field input[type=text]:focus {
-     border-bottom: 1px solid #000;
-     box-shadow: 0 1px 0 0 #000;
-   }
-   .input-field input[type=password]:focus + label {
-     color: #000;
-   }
-   /* label underline focus color */
-   .input-field input[type=password]:focus {
-     border-bottom: 1px solid #000;
-     box-shadow: 0 1px 0 0 #000;
-   }
-     /* icon prefix focus color */
-   .input-field .prefix.active {
-     color: white;
-   }
+	body{
+		background: url(resources/images/homewall.jpg) no-repeat;
+		background-size:cover;}
+	
+	/*form styles*/	
+	
+	/* label color */
+	.input-field label {color: #000;}
+   
+	/* label focus color */
+	.input-field input[type=text]:focus + label {color: #000;}
+   
+	/* label underline focus color */
+	.input-field input[type=text]:focus {border-bottom: 1px solid #000;box-shadow: 0 1px 0 0 #000;}
+		
+	/* label focus color for type password*/
+	.input-field input[type=password]:focus + label {color: #000;}
+	
+	/* label underline focus color fro type password*/
+	.input-field input[type=password]:focus {border-bottom: 1px solid #000;box-shadow: 0 1px 0 0 #000;}
+	
+	/* icon prefix focus color */
+	.input-field .prefix.active {color: white;}
 </style>
 </head>
 <body>
-	<div  id="login">	
 
-		<h1 class="center-align">
-      <strong>Welcome.</strong> Please login.</h1>
-		<form class="container"  method="post">
+	<div  id="login">
+	
+	<!-- header -->
+	<h1 class="center-align"><strong>Welcome.</strong> Please login.</h1>
+
+	<!-- form for login -->
+	<form class="container"  method="post">	
 		
 		<div class="row">
-        <div class="input-field col s12 m6 l4 offset-m3 offset-l4">
-          <i class="material-icons prefix">account_circle</i>
-          <input id="icon_prefix" type="text" class="validate" name="user" ng-model="kin.name" required="required">
-          <label for="icon_prefix">Name</label>
-        </div>
-        </div>
-
+		<div class="input-field col s12 m6 l4 offset-m3 offset-l4">
+			<i class="material-icons prefix">account_circle</i>
+			<input id="kinname" type="text" class="validate" name="user" ng-model="kin.name" required="required">
+			<label for="kinname">Name</label>
+		</div>
+		</div>
+		
 		<div class="row">
-        <div class="input-field col s12 m6 l4 offset-m3 offset-l4">
-          <i class="material-icons prefix">security</i>
-          <input id="icon_telephone" type="password" class="validate" name="password" ng-model="kin.password" required="required">
-          <label for="icon_telephone">Password</label>
-        </div>
-        </div>
-
+		<div class="input-field col s12 m6 l4 offset-m3 offset-l4">
+			<i class="material-icons prefix">security</i>
+			<input id="password" type="password" class="validate" name="password" ng-model="kin.password" required="required">
+			<label for="password">Password</label>
+		</div>
+		</div>
+		
 		<div class="row">
-        <div class="col s12 m4 l4 offset-m3 offset-l6"><a id="yourID" class="waves-effect waves-light btn"  type="submit" ng-click="submit()"><i class="material-icons left">person</i>Login</a></div>
-        		<div style="margin-top:10px;" class="col s12 m4 l4 offset-m3 offset-l6"><a href="#/signup" class="white-text">Please Sign-up, if not.</a></div>
-        
-        </div>
-        <div id="div" ng-show="mess.message" class="container center-align"><h5>{{mess.message}}</h5></div>
-        <div id="preloader" ng-hide="mess.message" class=" container progress">
-        <div class="center indeterminate"></div>
-        </div>
-        
-    </form>
-
-</div>
+			<div class="col s12 m4 l4 offset-m3 offset-l6"><a id="loginf" class="waves-effect waves-light btn"  type="submit" ng-click="login()"><i class="material-icons left">person</i>Login</a></div>
+			<div style="margin-top:10px;" class="col s12 m4 l4 offset-m3 offset-l6"><a href="#/signup" class="white-text">Please Sign-up, if not.</a></div>
+		</div>
+		
+		<!-- print error message -->
+		<div id="div" ng-show="errore.message" class="container center-align"><h5>{{errore.message}}</h5></div>
+		
+		<!-- preloader -->
+		<div id="preloader" ng-hide="errore.message" class=" container progress"><div class="center indeterminate"></div></div>
+		
+	</form>
+	
+	</div>
+	
 <script>
-$("#preloader").hide();
-$(function(){
-    $("#yourID").on("click",function(){
-        $("#preloader").show();
-        });
-});
-
+	//jquery initialization to hide preloader
+	$("#preloader").hide();
+	//function to show preloader on click
+	$(function(){$("#loginf").on("click",function(){$("#preloader").show();});});
 </script>
-
-
 </body>
 </html>

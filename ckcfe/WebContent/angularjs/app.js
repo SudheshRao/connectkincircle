@@ -1,16 +1,15 @@
 var app = angular.module('myApp',['ngRoute','ngCookies']);
 
 app.config(function($routeProvider) {
-	console.log("im inn");
+	console.log("configuring...");
+	
 	$routeProvider
-	.when('/signup',{
-		controller:'KinController',
-		templateUrl:'views/signup.html'
-	})
-	.when('/login',{
-		controller:'KinController',
-		templateUrl:'views/login.html'
-	})
+	.when('/', {templateUrl : 'views/home.html'})//home page route
+	
+	.when('/signup',{controller:'KinController',templateUrl:'views/signup.html'})//signup page route
+	
+	.when('/login',{controller:'KinController',templateUrl:'views/login.html'})//login page route
+	
 	.when('/landingpage',{
 		controller:'KinController',
 		templateUrl:'views/landingpage.html'
@@ -18,6 +17,10 @@ app.config(function($routeProvider) {
 	.when('/searchkin',{
 		controller:'ConnectController',
 		templateUrl:'views/searchkin.html'
+	})
+	.when('/kinconnects',{
+		controller:'ConnectController',
+		templateUrl:'views/kinconnects.html'
 	})
 	.when('/pendingrequest',{
 		controller:'ConnectController',
@@ -77,10 +80,7 @@ app.config(function($routeProvider) {
 		controller:'JobController', 
 		templateUrl:'views/removejob.html' 
 	})
-	.when('/', {
-		templateUrl : 'views/home.html'
-			
-	})
+	
 })
 	app.run(function($cookieStore,$rootScope,$location,KinService){  
 		console.log('app.run');

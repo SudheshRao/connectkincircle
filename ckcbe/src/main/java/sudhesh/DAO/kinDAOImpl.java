@@ -26,6 +26,7 @@ public class kinDAOImpl {
 		this.sessionFactory = sessionFactory;
 	}
 
+	//authenticate kin
 	public Kin authenticate(Kin kin) {
 		Session session=sessionFactory.getCurrentSession();
 		Query query=session.createQuery("from Kin where name=?  and password=?");
@@ -37,7 +38,7 @@ public class kinDAOImpl {
 		
 	}
 	
-	//get all Kins dao
+	//get all Kins
 	public List<Kin> getAllKins() {
 		Session session= sessionFactory.getCurrentSession();
 		Query query=session.createQuery("from Kin");
@@ -45,7 +46,8 @@ public class kinDAOImpl {
 		session.flush();
 		return Kins;
 	}
-
+	
+	//save kins
 	public Kin saveKin(Kin Kin) {
 		Session session=sessionFactory.getCurrentSession();
 		session.save(Kin);
@@ -53,6 +55,7 @@ public class kinDAOImpl {
 		return Kin;		
 	}
 
+	//get kin by name
 	public Kin getKinByName(String name) {
 		Session session=sessionFactory.getCurrentSession();
 		Query query=session.createQuery("from Kin where name=:un");
@@ -62,6 +65,7 @@ public class kinDAOImpl {
 		return validkin;
 	}
 	
+	//get kin by id
 	public Kin getKinById(int id) {
 		Session session=sessionFactory.getCurrentSession();
 		Kin Kin=(Kin)session.get(Kin.class, id);
@@ -69,6 +73,7 @@ public class kinDAOImpl {
 		return Kin;
 	}
 
+	//update kin when logged in
 	public Kin updateKin(Kin kin) {
 		Session session=sessionFactory.getCurrentSession();
 		Kin existingkin=(Kin)session.get(Kin.class, kin.getId());
@@ -78,12 +83,15 @@ public class kinDAOImpl {
 		return existingkin;
 	}
 
+	//update kin when edited
 	public Kin updateaKin(Kin kin) {
 		Session session=sessionFactory.getCurrentSession();
 		session.update(kin);
 		session.flush();
 		return kin;
 	}
+	
+	//delete a kin
 	public void deleteKin(int id) {
 		Session session=sessionFactory.getCurrentSession();
 		Kin Kin=(Kin)session.get(Kin.class, id);

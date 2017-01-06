@@ -1,123 +1,93 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>	
-<style>
-body{
-background:url(resources/images/homewall.jpg);
-background-size:cover;
-background-repeat:no-repeat;
-}
- /*{
-        dist:0,
-        shift:0,
-        padding:20,
 
-  }*/   
-</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>	
+	
+	<!-- jquery import -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	
+	<!-- materialize css and material fonts import -->
 	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
 	<script src="resources/materialize/js/materialize.min.js"/></script>
-<title>Insert title here</title>
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style>
+	body{
+		background:url(resources/images/homewall.jpg);
+		background-size:cover;
+		background-repeat:no-repeat;}
+ </style>
+	
 </head>
 <body>
 
- <div class="carousel intro" data-indicators="true">
- 
-    <div class="carousel-item"><img src="resources/images/connectkincircle1.png"><h5 class="center-align">Hi there</h5>
+	<!-- carousel intro -->
+	<div class="carousel intro" data-indicators="true">
+	
+	<div class="carousel-item"><img src="resources/images/connectkincircle1.png"><h5 class="center-align">Hi there</h5></div>
+	
+	<div class="carousel-item">
+		<div class="card" style="height:250px;">
+		<div class="card-image waves-effect waves-block waves-light"><img style="height:160px;" class="activator" src="resources/images/homeconnect.jpg"></div>
+		<div class="card-content"><span class="card-title activator grey-text text-darken-4">Connect<i class="material-icons right">more_vert</i></span></div>
+    	<div class="card-reveal">
+    		<span class="card-title grey-text text-darken-4">Connect<i class="material-icons right">close</i></span>
+    		<p>This portal helps to connect with kins.</p>
+    	</div>
+    	</div>
+    </div>
+    
+    <div class="carousel-item" >
+    	<div class="card" style="height:250px;">
+    	<div class="card-image waves-effect waves-block waves-light"><img  style="height:160px;"class="activator" src="resources/images/homeintranet.png"></div>
+    	<div class="card-content"><span class="card-title activator grey-text text-darken-4">Intranet<i class="material-icons right">more_vert</i></span></div>
+    	<div class="card-reveal">
+    		<span class="card-title grey-text text-darken-4">Intranet<i class="material-icons right">close</i></span>
+    		<p>An internal website that helps employees get stuff done.</p>
+    	</div>
+    	</div>
     </div>
     
     <div class="carousel-item">
-		<div class="card" style="height:250px;">
-    	
-    	<div class="card-image waves-effect waves-block waves-light">
-      		<img style="height:160px;" class="activator" src="resources/images/homeconnect.jpg">
-    	</div>
-    	
-    	<div class="card-content">
-      		<span class="card-title activator grey-text text-darken-4">Connect<i class="material-icons right">more_vert</i></span>
-    	</div>
-    	
-    	<div class="card-reveal">
-      		<span class="card-title grey-text text-darken-4">Connect<i class="material-icons right">close</i></span>
-      		<p>This portal helps to connect with kins.</p>
-    	</div>
-  	
-  		</div>
-	</div>
-	
-    <div class="carousel-item" >
     	<div class="card" style="height:250px;">
-    	
-    	<div class="card-image waves-effect waves-block waves-light">
-      		<img  style="height:160px;"class="activator" src="resources/images/homeintranet.png">
-    	</div>
-    	
-    	<div class="card-content">
-      		<span class="card-title activator grey-text text-darken-4">Intranet<i class="material-icons right">more_vert</i></span>
-    	</div>
-    	
+    	<div class="card-image waves-effect waves-block waves-light"><img style="height:160px;" class="activator" src="resources/images/homeblog.jpeg"></div>
+    	<div class="card-content"><span class="card-title activator grey-text text-darken-4">Blog<i class="material-icons right">more_vert</i></span></div>
     	<div class="card-reveal">
-      		<span class="card-title grey-text text-darken-4">Intranet<i class="material-icons right">close</i></span>
-      		<p>An internal website that helps employees get stuff done.</p>
+    		<span class="card-title grey-text text-darken-4">Blog<i class="material-icons right">close</i></span>
+    		<p>Know the news uploaded by others.</p>
     	</div>
-  	
-  		</div>
-  	</div>
-  
+    	</div>
+    </div>
+    
     <div class="carousel-item">
-		<div class="card" style="height:250px;">
-    	
-    	<div class="card-image waves-effect waves-block waves-light">
-      		<img style="height:160px;" class="activator" src="resources/images/homeblog.jpeg">
-    	</div>
-    	
-    	<div class="card-content">
-      		<span class="card-title activator grey-text text-darken-4">Blog<i class="material-icons right">more_vert</i></span>
-    	</div>
-    	
+    	<div class="card" style="height:250px;">
+    	<div class="card-image waves-effect waves-block waves-light"><img style="height:160px;" class="activator" src="resources/images/homejobs.jpg"></div>
+    	<div class="card-content"><span class="card-title activator grey-text text-darken-4">Jobs<i class="material-icons right">more_vert</i></span></div>
     	<div class="card-reveal">
-      		<span class="card-title grey-text text-darken-4">Blog<i class="material-icons right">close</i></span>
-      		<p>Know the news uploaded by others.</p>
+    		<span class="card-title grey-text text-darken-4">Jobs<i class="material-icons right">close</i></span>
+    		<p>Search for jobs within the organization.</p>
     	</div>
-  	
-  		</div>
+    	</div>
+    </div>
+    
+    </div><!-- carousel ends -->
+    
+    <!-- buttons for login and signup visible only when not logged inn -->
+    <div class="center-align" ng-hide="currentUser.name">
+    	<a href="#/login" class="waves-effect waves-light btn"><i class="material-icons left">person</i>Login</a>
+    	<a href="#/signup" class="waves-effect waves-light btn"><i class="material-icons left">person_add</i>Sign-up</a>
 	</div>
 	
-    <div class="carousel-item">
-		<div class="card" style="height:250px;">
-    	
-    	<div class="card-image waves-effect waves-block waves-light">
-      		<img style="height:160px;" class="activator" src="resources/images/homejobs.jpg">
-    	</div>
-    	
-    	<div class="card-content">
-      		<span class="card-title activator grey-text text-darken-4">Jobs<i class="material-icons right">more_vert</i></span>
-    	</div>
-    	
-    	<div class="card-reveal">
-      		<span class="card-title grey-text text-darken-4">Jobs<i class="material-icons right">close</i></span>
-      		<p>Search for jobs within the organization.</p>
-    	</div>
-		</div>
-  	</div>
-  	
-  </div>
-
-	<div class="center-align" ng-hide="currentUser.name">
-		<a href="#/login" class="waves-effect waves-light btn"><i class="material-icons left">person</i>Login</a>
-		<a href="#/signup" class="waves-effect waves-light btn"><i class="material-icons left">person_add</i>Sign-up</a>
-	</div>
+<script>
+$(document).ready(function(){
 	
-
-
-  <script>
-  $(document).ready(function(){
-    $('.carousel').carousel();
+	//jquery initialization for carousel
+	$('.carousel').carousel();
+	//rotation of carousel on load by 5 steps(animation)
     $('.carousel').carousel('next',5);
-  });      
-  </script>  
-   
+    });      
+</script>     
 </body>
 </html>

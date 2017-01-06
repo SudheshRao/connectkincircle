@@ -31,85 +31,84 @@ public class KinController {
 
 	@Autowired
 	private UploadFileDaoImpl uploadFileDao;
-	
-	
+		
 	//login a kin
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ResponseEntity<?> login(@RequestBody Kin kin, HttpSession session){
+	public ResponseEntity<?> login(@RequestBody Kin kin, HttpSession session){		
 		
-	Kin validKin=kindao.authenticate(kin);
-	if(validKin==null){
-		Errore error=new Errore(1,"Username and password doesnt exists...");
-		return new ResponseEntity<Errore>(error,HttpStatus.UNAUTHORIZED); 
-	}
-	else{
-		if(validKin.isStatus()==true){
-			
-			session.setAttribute("kin", validKin);
-			validKin.setIsonline(true);
-			kindao.updateKin(validKin);
-			return new ResponseEntity<Kin>(validKin,HttpStatus.OK);
-		}
-		else{
-			Errore error=new Errore(3,"you are still not authorized....Contact Admin");
-			return new ResponseEntity<Errore>(error,HttpStatus.UNAUTHORIZED);
+		Kin validKin=kindao.authenticate(kin);//authenicate the kin
+		
+		if(validKin==null){
+			Errore error=new Errore(1,"Username and password doesnt exists...");
+			return new ResponseEntity<Errore>(error,HttpStatus.UNAUTHORIZED); }//return error if he doesnt exist
+		else{		
+			//check for status(whether admin has provided the access or not)
+			if(validKin.isStatus()==true){
+				//if authorized login
+				session.setAttribute("kin", validKin);//store kin in a session attribute
+				validKin.setIsonline(true);//set online
+				kindao.updateKin(validKin);//update kin
+				return new ResponseEntity<Kin>(validKin,HttpStatus.OK);//return complete details of kin
 			}
-	}
-
+			else{//if not authorized
+				Errore error=new Errore(3,"you are still not authorized....Contact Admin");
+				return new ResponseEntity<Errore>(error,HttpStatus.UNAUTHORIZED);//return an error
+				}
+			}
 	}
 	
 	//logout a kin
 	@RequestMapping(value = "/logout", method = RequestMethod.PUT)
-	public ResponseEntity<Kin> logout(HttpSession session)	{
-		Kin validKin = (Kin) session.getAttribute("kin");
-		System.out.println("logout");
-		if(validKin!=null){
-			validKin.setIsonline(false);
-			kindao.updateKin(validKin);
-		}
-		session.removeAttribute("kin");
-		session.invalidate();
-		return new ResponseEntity<Kin>(HttpStatus.OK);
+	public ResponseEntity<Kin> logout(HttpSession session){
+		
+		Kin kin = (Kin) session.getAttribute("kin");
+		
+		if(kin!=null){//if kin exists
+			kin.setIsonline(false);//set kin offline
+			kindao.updateKin(kin);}//update kin
+		
+		session.removeAttribute("kin");//remove kin from session
+		session.invalidate();//invalidate the session
+		return new ResponseEntity<Kin>(HttpStatus.OK);//return the status
 	}
 
 	//register a Kin
-		@RequestMapping(value="/Kin",method=RequestMethod.POST)
-		public ResponseEntity<?> createKin(@RequestBody Kin Kin,HttpSession session) throws IOException{
-			Kin checkkin=kindao.getKinByName(Kin.getName());
-			if(checkkin==null){
-				
-			Kin.setStatus(false);
-			Kin.setIsonline(false);
-			Kin savedkin = kindao.saveKin(Kin);
-			session.setAttribute("kini",savedkin);
-            FileInputStream fin= new FileInputStream("C:/Users/K.S.Raghavendra Bhat/workspace/ckcfe/WebContent/resources/images/connectkincircle1.png");
-            FileOutputStream fout=new FileOutputStream("C:/Users/K.S.Raghavendra Bhat/workspace/ckcfe/WebContent/resources/dp/"+savedkin.getName());  
-            int i=0;  
-            while((i=fin.read())!=-1){  
-            fout.write((byte)i);  
-            }
-            fout.close();
-            fin.close();
-            
-			if(savedkin.getId()==0){
-				Errore error=new Errore(2,"Couldnt insert user details ");
+	@RequestMapping(value="/signup",method=RequestMethod.POST)
+	public ResponseEntity<?> signup(@RequestBody Kin Kin,HttpSession session) throws IOException{
+		
+		Kin checkkin=kindao.getKinByName(Kin.getName());
+		
+		if(checkkin==null){//if there is no kin by the name 
+			System.out.println(Kin.getPassword() +"  "+ Kin.getConfirmpassword());
+			if(Kin.getPassword().equals(Kin.getConfirmpassword())){
+				Kin.setStatus(false);
+				Kin.setIsonline(false);
+				Kin savedkin = kindao.saveKin(Kin);
+				session.setAttribute("kini",savedkin);//save kin
+				//save initial dp as the logo of ckc
+		        FileInputStream fin= new FileInputStream("C:/Users/K.S.Raghavendra Bhat/workspace/ckcfe/WebContent/resources/images/connectkincircle1.png");
+		        FileOutputStream fout=new FileOutputStream("C:/Users/K.S.Raghavendra Bhat/workspace/ckcfe/WebContent/resources/dp/"+savedkin.getName());  
+		        int i=0;  
+		        while((i=fin.read())!=-1){  
+		        fout.write((byte)i);  
+		        }
+		        fout.close();
+		        fin.close();
+				return new ResponseEntity<Kin>(savedkin,HttpStatus.OK);//return kin in case saved
+			}
+			else{
+				Errore error=new Errore(5,"passwords dont match");
 				return new ResponseEntity<Errore>(error , HttpStatus.CONFLICT);
-			}
-			else
-				return new ResponseEntity<Kin>(savedkin,HttpStatus.OK);
-			}
-			else
-			{
-				Errore error=new Errore(2,"Couldnt insert user details ");
-				return new ResponseEntity<Errore>(error , HttpStatus.CONFLICT);
-			}
-				
+				}//return error if kin could not be saved
+		}else{
+			Errore error=new Errore(2,"Couldnt insert user details ");
+			return new ResponseEntity<Errore>(error , HttpStatus.CONFLICT);//return error if kin could not be saved
 		}
 		
-		
+	}		
 
 	//get all Kins
-	@RequestMapping(value="/Kin",method=RequestMethod.GET)
+	@RequestMapping(value="/getallkins",method=RequestMethod.GET)
 	public  ResponseEntity<List<Kin>> getAllKins(){
 		
 		List<Kin> Kins=kindao.getAllKins();
@@ -121,7 +120,7 @@ public class KinController {
 	}
 	
 	//get Kin by id
-	@RequestMapping(value="/Kin/{id}",method=RequestMethod.GET)
+	@RequestMapping(value="/getkinbyid/{id}",method=RequestMethod.GET)
 	public ResponseEntity<Kin> getKinById(@PathVariable(value="id") int id){
 	
 		Kin Kin=kindao.getKinById(id);
@@ -134,7 +133,7 @@ public class KinController {
 	}
 
 	//update a Kin
-	@RequestMapping(value="/Kin/{id}",method=RequestMethod.PUT)
+	@RequestMapping(value="/updatekin/{id}",method=RequestMethod.PUT)
 	public ResponseEntity<Kin> updateKin(@PathVariable int id,@RequestBody Kin Kin){
 		
 		Kin updatedKin=kindao.updateKin(Kin);
@@ -147,17 +146,19 @@ public class KinController {
 	}
 	
 	//delete a Kin
-	@RequestMapping(value="/Kin/{id}",method=RequestMethod.DELETE)
+	@RequestMapping(value="/deletekin/{id}",method=RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteKin(@PathVariable int id){
+		
 		Kin Kin=kindao.getKinById(id);
-		try{
+		try{//delete kins dp in frontend
      		File file=new File("C:/Users/K.S.Raghavendra Bhat/workspace/ckcfe/WebContent/resources/dp/"+Kin.getName());
      		file.delete();	
      		}catch(Exception e){e.printStackTrace();}
+		
         UploadFile uploadFile = uploadFileDao.getFile(Kin.getName());
         if(uploadFile!=null)
-        uploadFileDao.deletpic(uploadFile);
-		kindao.deleteKin(id);
+        uploadFileDao.deletepic(uploadFile);//delete kins dp in DB
+		kindao.deleteKin(id);//delete kin
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 

@@ -3,8 +3,31 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
+	<script src="resources/materialize/js/materialize.min.js"/></script>
+<style>
+</style>
 </head>
 <body>
-
+ <div class="row">
+ <div ng-repeat="k in pendingrequest">
+        <div class="col s12 m4 l3">
+          <div class="card">
+            <div class="card-image">
+            <img class="responsive-img" src="resources/dp/{{k.name}}">
+              <span class="card-title">{{k.name}}</span>
+            </div>
+            <div class="card-content">
+              <p>Post : {{k.post}}</p>
+              <p>Role : {{k.role}}</p>
+            </div>
+            <div class="card-action">
+              <a class="waves-effect waves-green" ng-click="updatePendingRequest(k.name,'A')">Connect</a>
+              <a class="waves-effect waves-red" ng-click="updatePendingRequest(k.name,'D')">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>          
 </body>
 </html>

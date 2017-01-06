@@ -4,82 +4,143 @@
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-
+	
+	<!-- jquery import -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-
+	
+	<!-- materialize css and material fonts import -->
 	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
 	<script src="resources/materialize/js/materialize.min.js"/></script>
-  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      
-
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   
 	<title>KinCircle</title>
+	
 	<style>
-	::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar
-{
-	width: 6px;
-	background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar-thumb
-{
-	background-color: #000000;
-}
-	
-	
+		/*navbar position*/
+		.overlap{
+			top: -60px;
+			position: relative;}
+			
+		/*scrollbar style*/
+		::-webkit-scrollbar-track{
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+			background-color: #F5F5F5;}
+		::-webkit-scrollbar{
+			width: 6px;
+			background-color: #F5F5F5;}
+		::-webkit-scrollbar-thumb{
+			background-color: #000000;}
 	</style>	 
+	
 </head>
 <body ng-app="myApp">
 
-<div>
-<ul id="slide-out" class="side-nav"  >
-    <li><div class="userView">
-      <div class="background" style="background-image: url(resources/images/sideback.png);background-size:cover;"> 
-      </div>
-      <div>
-      <img class="circle" ng-show="name" src="resources/images/login-image.jpg">
-      <img class="circle center-block" style="height:100px;width:100px;" ng-hide="currentUser.name" src="resources/images/connectkincircle1.png">
-      <img class="circle center-block" style="height:100px;width:100px;" ng-show="currentUser.name" src="resources/dp/{{currentUser.name}}">
-      <p ng-hide="currentUser.name">Copyrights 2017</p>
-      <span ng-show="currentUser.name"class="white-text name">{{currentUser.name}}</span>
-      <span ng-show="currentUser.name"class="white-text email">{{currentUser.post}}</span></div>
-    </div></li>
-    <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-    <li ng-show="currentUser.name" ><a href="#/uploadpicture" class="waves-effect waves-light btn">Upload Picture</a></li>
-    <li ng-show="currentUser.name" ><a href="#/searchjob" class="waves-effect waves-light btn">Job Search</a></li>
-    <li ng-show="currentUser.name" ><a href="#/appliedjob" class="waves-effect waves-light btn">Applied Job</a></li>
-    <li ng-show="currentUser.name" ><a href="#/searchkin" class="waves-effect waves-light btn">Search Kin</a></li>
-    <li ng-show="currentUser.name" ><a href="#/pendingrequest" class="waves-effect waves-light btn">Connect Requests</a></li>
-    <li ng-show="currentUser.role=='admin'" ><a href="#/adminfunctions" class="waves-effect waves-light btn">Admin functions</a></li>
-    <li><a href="#!">Second Link</a></li>
-    <li><div class="divider"></div></li>
-    <li><a class="subheader">Subheader</a></li>
-    <li ng-show="currentUser.name"><a class="waves-effect" ng-click="logout()"><i class="material-icons">exit_to_app</i><span>logout</span></a></li>
-  </ul></div>
-  <a href="#" style="margin:10px;"  data-activates="slide-out" class=" hoverable button-collapse btn-floating waves-effect waves-light red"><i style="font-size:30px;" class="material-icons">menu</i></a>
-  <a  style="margin:10px;" ng-show="currentUser.name" ng-click="logout()" class="right hide-on-small-only hoverable btn-floating waves-effect waves-light"><i style="font-size:30px;" class="material-icons">exit_to_app</i></a>
-   
-   <div ng-view></div>      
+	<!-- menu for side nav -->
+	<a style="margin:10px;" data-activates="slide-out" class=" button-collapse btn-floating waves-effect waves-light hoverable red"><i style="font-size:30px;" class="material-icons">menu</i></a>
+	
+	<!-- logout button on nav  hidden in small devices-->
+	<a  style="margin:10px;" ng-show="currentUser.name" ng-click="logout()" class="hide-on-small-only btn-floating waves-effect waves-light hoverable right "><i style="font-size:30px;" class="material-icons">exit_to_app</i></a>
+	
+	<!-- navbar -->
+	<nav class="overlap white hoverable">
+		<div class="nav-wrapper container">
+		
+		<!-- brand name visible only on large devices -->
+		<a href="#/landingpage" class="brand-logo black-text hide-on-med-and-down">Connect Kin Circle</a>
+		
+		<!-- links for chat, notification, pending requests and settings-->
+		<ul class="right" >
+			<li style="width:50px;"><a  data-activates="slide-t" onclick="Chat()" class="button-collaps black-text show-on-large"><i class="material-icons">chat</i></a></li>        
+			<li style="width:50px;"><a  data-activates="slide-t" onclick="Notification()" class="button-collaps black-text show-on-large"><i class="material-icons">notifications</i></a></li>        
+			<li style="width:50px;"><a  data-activates="slide-t" onclick="FriendRequest()" class="button-collaps black-text show-on-large"><i class="material-icons">people</i></a></li>        
+			<li style="width:50px;"><a  data-activates="slide-t" onclick="Settings()" class="button-collaps black-text show-on-large"><i class="material-icons">settings</i></a></li>        
+		</ul>
+		
+		</div>
+	</nav> <!-- end of navbar -->
+	
+	<!-- slideout code for menu button -->
+	<ul id="slide-out" class="side-nav">
+		<li>
+			<div class="userView"><div class="background" style="background-image: url(resources/images/sideback.png);background-size:cover;"></div>
+			<div>
+				<img class="circle center-block" style="height:100px;width:100px;" ng-hide="currentUser.name" src="resources/images/connectkincircle1.png">
+				<img class="circle center-block" style="height:100px;width:100px;" ng-show="currentUser.name" src="resources/dp/{{currentUser.name}}">
+				<p ng-hide="currentUser.name">Copyrights 2017</p>
+				<span ng-show="currentUser.name"class="white-text name">{{currentUser.name}}</span>
+				<span ng-show="currentUser.name"class="white-text email">{{currentUser.post}}</span></div>
+			</div>
+		</li>
+		<li ng-show="currentUser.name" ><a href="#/uploadpicture" class="waves-effect waves-light ">Upload Picture</a></li>
+		<li ng-show="currentUser.name" ><a href="#/searchjob" class="waves-effect waves-light ">Job Search</a></li>
+		<li ng-show="currentUser.name" ><a href="#/appliedjob" class="waves-effect waves-light ">Applied Job</a></li>
+		<li ng-show="currentUser.name" ><a href="#/searchkin" class="waves-effect waves-light">Search Kin</a></li>
+		<li ng-show="currentUser.name" ><a href="#/kinconnects" class="waves-effect waves-light">Kin Connections</a></li>
+		<li ng-show="currentUser.name" ><a href="#/pendingrequest" class="waves-effect waves-light">Pending Requests</a></li>
+		<li ng-show="currentUser.role=='admin'" ><a href="#/adminfunctions" class="waves-effect waves-light">Admin functions</a></li>
+		<li><div class="divider"></div></li>
+		<li><a class="subheader">Subheader</a></li>
+		<li ng-show="currentUser.name"><a class="waves-effect" ng-click="logout()"><i class="material-icons">exit_to_app</i><span>logout</span></a></li>
+	</ul>
+	
+	<!-- slideout for chat, notification, pending request and settings -->
+	<div id="slide-t" class="side-nav">
+	<div class="row">
+		<div class="col s12">
+			<ul class="tabs">
+				<li class="tab col s3"><a href="#chat" class="black-text show-on-large"><i class="material-icons">chat</i></a></li>
+				<li class="tab col s3"><a href="#notification" class=" black-text show-on-large"><i class="material-icons">notifications</i></a></li>
+				<li class="tab col s3"><a href="#friendrequest" class=" black-text show-on-large"><i class="material-icons">people</i></a></li>
+				<li class="tab col s3"><a href="#settings" class="black-text show-on-large"><i class="material-icons">settings</i></a></li>
+			</ul>
+		</div>
+		
+		<div id="chat" class="col s12 ">test1</div>
+		<div id="notification" class="col s12 ">test2</div>
+		<div id="friendrequest" class="col s12 ">test3</div>
+		<div id="settings" class="col s12">test4</div>
+	</div>
+	</div> 
+	
+	<!-- ng-view complements the $route service-->
+	<div ng-view></div>      
 
- <script>
- $(".button-collapse").sideNav({
-	 closeOnClick: true,
-	 edge: 'left',
-     draggable: true // Choose
-
+<script>
+$(document).ready(function(){
+	
+	//jquery initialization for tabs 
+	 $('ul.tabs').tabs();
+	
+	//jquery initialization for sidenav menu
+	$(".button-collapse").sideNav({
+	 closeOnClick: true, //sidenav closes on click of link
+	 edge: 'left', //opens from left side
+     draggable: true // enables swipe for touch screens
 	 });
- $('.collapsible').collapsible();     
- </script>
-<script src="resources/bootstrap/js/jquery-3.1.0.min.js"/></script> 
+	
+	//jquery initialization for second side nav
+	$('.button-collaps').sideNav({
+    edge: 'right', //opens from right side
+    draggable: true // enables swipe for touch screens
+    });
+	
+	//jquery initialization for dropdown if exists
+	$('.collapsible').collapsible();     
+	
+	});
+	
+	//functions for selection of respective tabs on sidenav on activation of second sidenav
+	function Notification() {$('ul.tabs').tabs('select_tab', 'notification');}
+	function Chat() {$('ul.tabs').tabs('select_tab', 'chat');}
+	function Settings() {$('ul.tabs').tabs('select_tab', 'settings');}
+	function FriendRequest() {$('ul.tabs').tabs('select_tab', 'friendrequest');}
+</script>
+<!-- angularjs import -->
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-resource.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-cookies.js"></script>   
+<!-- config, controllers and service imports -->
 <script src="angularjs/app.js"></script>
 <script src="angularjs/kincontroller.js"></script>
 <script src="angularjs/kinservice.js"></script>
@@ -91,5 +152,4 @@
 <script src="angularjs/connectservice.js"></script>
       
 </body>
-
 </html>
