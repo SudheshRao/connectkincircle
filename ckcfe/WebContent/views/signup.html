@@ -5,9 +5,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	
-	<!-- jquery import -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-	
 	<!-- materialize css and material fonts import -->
 	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
 	<script src="resources/materialize/js/materialize.min.js"/></script>
@@ -69,12 +66,12 @@
 		</div>
 		
 		<div class="input-field col s6 ">
-			<input id="pswd" type="text" class="validate" ng-model="kin.password" pattern=".{8,}"  required>
+			<input id="pswd" type="password" class="validate" ng-model="kin.password" pattern=".{8,}"  required>
 			<label for="pswd">Password</label>
 		</div>
 		
 		<div class="input-field col s6 ">
-			<input id="cpswd" type="text" class="validate" ng-model="kin.confirmpassword" pattern=".{8,}" title="Should match the above password" required>
+			<input id="cpswd" type="password" class="validate" ng-model="kin.confirmpassword" pattern=".{8,}" title="Should match the above password" required>
 			<label for="cpswd">Confirm Password</label>
 		</div>
 		

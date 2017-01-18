@@ -15,7 +15,13 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import sudhesh.model.BlogComment;
+import sudhesh.model.BlogPost;
+import sudhesh.model.Bloglikes;
+import sudhesh.model.Calendarsrc;
 import sudhesh.model.Connects;
+import sudhesh.model.EventStatus;
+import sudhesh.model.Events;
 import sudhesh.model.Job;
 import sudhesh.model.JobApplied;
 import sudhesh.model.Kin;
@@ -71,13 +77,18 @@ public class DBConfig {
 	   LocalSessionFactoryBuilder sessionBuilder=new LocalSessionFactoryBuilder(getOracleDataSource());
 	
    sessionBuilder.addProperties(getHibernateProperties());
-	sessionBuilder.addAnnotatedClass(Kin.class);
-	sessionBuilder.addAnnotatedClass(Job.class);
-	sessionBuilder.addAnnotatedClass(UploadFile.class);
-	sessionBuilder.addAnnotatedClass(JobApplied.class);
-	sessionBuilder.addAnnotatedClass(Connects.class);
-	sessionBuilder.addAnnotatedClass(Notifications.class);
-			
+	sessionBuilder.addAnnotatedClasses(Kin.class,
+			Job.class,
+			UploadFile.class,
+			JobApplied.class,
+			Connects.class,
+			Notifications.class,
+			BlogPost.class,
+			BlogComment.class,
+			Bloglikes.class,
+			Events.class,
+			EventStatus.class,
+			Calendarsrc.class);		
 	return sessionBuilder.buildSessionFactory();
 	
 	}

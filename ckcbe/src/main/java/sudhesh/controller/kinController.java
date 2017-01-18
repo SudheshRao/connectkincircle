@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import sudhesh.DAO.UploadFileDaoImpl;
 import sudhesh.DAO.kinDAOImpl;
+import sudhesh.model.Calendarsrc;
 import sudhesh.model.Errore;
 import sudhesh.model.Kin;
 import sudhesh.model.UploadFile;
@@ -107,6 +108,33 @@ public class KinController {
 		
 	}		
 
+	@RequestMapping(value="/calendarsrc",method=RequestMethod.POST)
+	public ResponseEntity<?> cal(@RequestBody Calendarsrc cs,HttpSession session) throws IOException{
+		Kin kin=(Kin)session.getAttribute("kin");
+		if(kin==null){
+			Errore error=new Errore(1,"Unauthroized Kin");
+			return new ResponseEntity<Errore>(error,HttpStatus.UNAUTHORIZED);
+		}
+		Calendarsrc cst = new Calendarsrc();
+		cst.setKin(kin.getName());
+		cst.setSrc(cs.getSrc());
+		kindao.savecal(cst);
+		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		
+	}		
+	
+	@RequestMapping(value="/getcalsrc",method=RequestMethod.GET)
+	public ResponseEntity<?> getcal(HttpSession session) throws IOException{
+		Kin kin=(Kin)session.getAttribute("kin");
+		if(kin==null){
+			Errore error=new Errore(1,"Unauthroized Kin");
+			return new ResponseEntity<Errore>(error,HttpStatus.UNAUTHORIZED);
+		}
+		Calendarsrc cs=kindao.getcal(kin.getName());
+		return new ResponseEntity<Calendarsrc>(cs,HttpStatus.OK);
+		
+	}		
+	
 	//get all Kins
 	@RequestMapping(value="/getallkins",method=RequestMethod.GET)
 	public  ResponseEntity<List<Kin>> getAllKins(){

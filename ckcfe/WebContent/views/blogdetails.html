@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	
+	<!-- materialize css and material fonts import -->
+	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
+	<script src="resources/materialize/js/materialize.min.js"/></script>
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+	<div class="row container">
+		
+		<div class="col s12 m12 l12">
+			<ul class="tabs black" >
+				<li class="tab col s12 m12 l12"><a class="active white-text" href="#new">{{blogPost.title}}</a></li>
+			</ul>
+			<div class="divider black" style="height:2px;"></div>
+		</div>
+
+		<div id="new" class="col s12 m12 l12">	
+			<div class="white">
+			<div class="row" style="">
+				<div class="col s12 m12 l12">
+					<img class="circle col s4 m2 l1 responsive-img" style="margin:5px;" ng-show="currentUser.name" src="resources/dp/{{blogPost.createdBy.name}}">			
+					<p style="margin:5px;" class="col s6 m9 l10">{{blogPost.createdBy.name}}<br><small>On: {{blogPost.createdOn | date:'MM/dd/yyyy HH:mm'}}</small></p>			
+					<div class="divider col s12 m12 l12"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 m12 l12">		
+					<div class="col s12 m12 l12"><pre>{{blogPost.body}}</pre></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 m12 l12 ">		
+					<a ng-click="ilike(blogPost.id)"class="col s6 m6 l6 center-align grey lighten-4 btn black-text" >					
+					<span>{{blogPost.likes}} Likes</span>
+					<span style="width:10px;"></span>
+					<span ng-repeat="bl in blogliked">
+					<i ng-show="bl.blogid==blogPost.id" class="material-icons blue-text">thumb_up</i>
+					</span>
+					</a>
+					<a ng-click="getComments(blogPost.id)" class="col s6 m6 l6 center-align grey lighten-4 btn vlack-text"><i class="material-icons black-text">comment</i>Show Comments</a>
+				</div>
+			</div>
+			<div class="row">
+				<form class="col s12 m12 l12"  style="margin:0px;">
+				<div class="input-field col s12 m12 l12">
+					<input class="col s10 m10 l10" id="comment" type="text" class="validate" ng-model="comment.body"  required="required">
+					<label for="comment">Comment</label>
+					<a class="col s2 m2 l2 waves-effect waves-light" ng-click="addcomment(blogPost.id)"><i class="material-icons">send</i></a>
+				</div>
+				</form>			
+			</div>
+			<div class="row" style="" ng-show="showComments">
+			<div  ng-repeat="comment in comments  | orderBy:'createdOn':true">
+				<div class="col s12 m12 l12">
+					<img class="circle col s4 m2 l1 responsive-img" style="margin:5px;" ng-show="currentUser.name" src="resources/dp/{{blogPost.createdBy.name}}">			
+					<p style="margin:5px;" class="col s6 m9 l10"><small>{{comment.createdBy.name}}</small><br>{{comment.body}}<br><small>{{comment.createdOn | date:'MM/dd/yyyy HH:mm'}}</small></p>			
+					<div class="divider col s12 m12 l12"></div>
+				</div>
+			</div>
+			</div>
+			</div>
+		</div>		
+	</div>				
+
+</body>
+</html>

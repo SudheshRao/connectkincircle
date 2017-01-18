@@ -1,0 +1,38 @@
+app.controller('EventController',function($scope,$location,$window,EventService){
+	console.log("event");
+	$scope.event={};
+	$scope.events=[];
+	
+	$scope.postevent=function(){
+		EventService.postevent($scope.event)
+		.then(function(response){
+			console.log(response.status);
+			$window.location.reload();			
+		},function(response){
+			console.log(response.status);
+		})
+	}
+	$scope.estatus=function(id,status){
+		console.log(id + status);
+		EventService.estatus(id,status)
+		.then(function(response){
+			console.log(response.status);
+			$scope.events;			
+		},function(response){
+			console.log(response.status);
+		})
+	}
+	$scope.events=
+		EventService.getevents()
+	.then(function(response){
+		console.log(response.status);
+		$scope.events=response.data;
+		EventService.geteventstatus()
+		.then(function(response){
+			console.log(response.status);
+			$scope.eventstatus=response.data;
+		},function(response){
+			console.log(response.status);
+		})
+	})
+})	

@@ -6,6 +6,8 @@ app.config(function($routeProvider) {
 	$routeProvider
 	.when('/', {templateUrl : 'views/home.html'})//home page route
 	
+	.when('/calendar', {controller:'CalendarController',templateUrl : 'views/calendar.html'})//home page route
+		
 	.when('/signup',{controller:'KinController',templateUrl:'views/signup.html'})//signup page route
 	
 	.when('/login',{controller:'KinController',templateUrl:'views/login.html'})//login page route
@@ -21,10 +23,18 @@ app.config(function($routeProvider) {
 	.when('/iuploadpicture',{templateUrl:'views/iuploadpicture.html'})//initial dp upload route
 	
 	.when('/uploadpicture',{templateUrl:'views/uploadpicture.html'})//change dp route
-	
+		
 	.when('/searchjob',{controller:'JobController',templateUrl:'views/jobsearch.html'})//job search page route
 	
 	.when('/appliedjob',{controller:'JobController',templateUrl:'views/appliedjob.html'})//list of applied job page route
+
+	.when('/blogDetail/:id',{controller:'BlogDetailController',templateUrl:'views/blogdetails.html'})
+
+	.when('/blog',{controller:'BlogController',templateUrl:'views/blog.html'})//blog page route
+	
+	.when('/events',{controller:'EventController',templateUrl:'views/event.html'})//event page route
+	
+	.when('/chat',{controller:'ChatController',templateUrl:'views/chat.html'})//event page route
 	
 	//Admin Functions routes 
 	
@@ -55,6 +65,8 @@ app.config(function($routeProvider) {
 
 	if($rootScope.currentUser==undefined)
 		$rootScope.currentUser=$cookieStore.get('currentUser')
+		$rootScope.prs=$cookieStore.get('pendingrequest');
+		$rootScope.notify=$cookieStore.get('notifi');
 		$rootScope.logout=function(){
 		console.log('logout function');
 		KinService.logout().then(function(response){

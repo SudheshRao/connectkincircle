@@ -5,9 +5,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	
-	<!-- jquery import -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	
 	<!-- materialize css and material fonts import -->
 	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
 	<script src="resources/materialize/js/materialize.min.js"/></script>
@@ -30,6 +27,7 @@
 		</div>
 	</div>
 	
+	<div class="row">
 	<div class="col s4 m6 l6 offset-s4 offset-m3 offset-l3">
 	<ul class="collapsible"  data-collapsible="accordion">
 		<li ng-repeat="job in jb | filter:searchText" >
@@ -61,7 +59,7 @@
 		</li>
 	</ul>
 	</div>
-
+	</div>
 <script>
 $(document).ready(function(){$('.collapsible').collapsible();});
 </script>        

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import sudhesh.model.Calendarsrc;
 import sudhesh.model.Kin;
 
 @Repository
@@ -98,6 +99,22 @@ public class kinDAOImpl {
 		session.delete(Kin);
 		session.flush();
 		
+	}
+
+	public void savecal(Calendarsrc cst) {
+		Session session=sessionFactory.getCurrentSession();
+		session.save(cst);
+		session.flush();
+		
+	}
+
+	public Calendarsrc getcal(String name) {
+		Session session=sessionFactory.getCurrentSession();
+		Query query=session.createQuery("from Calendarsrc where kin=:un");
+		query.setParameter("un", name);
+		Calendarsrc src=(Calendarsrc)query.uniqueResult();
+		session.flush();
+		return src;
 	}
 
 

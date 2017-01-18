@@ -1,23 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>	
-<style>
-body{
-background: #fafafa;
-}
-.overlap{
-    top: -60px;
-position: relative;
-}  
-</style>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	
+	<!-- materialize css and material fonts import -->
 	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
 	<script src="resources/materialize/js/materialize.min.js"/></script>
-<title>Insert title here</title>
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	
+	<style>
+		/*navbar position*/
+		.overlay{
+			top: -60px;
+			position: relative;}
+			
+		
+	</style>	 
 </head>
 <body>
+	<div class="row grey darken-4 overlay"  style="background-image: url(resources/images/timeline.jpg);background-size:cover;">
+		<img class="col s4 m2 l2 offset-m1 offset-l1" style="margin-top:20px;margin-bottom:20px;" ng-show="currentUser.name" src="resources/dp/{{currentUser.name}}">
+		<div class="col s6 m4 l4" style="margin-top:20px;margin-bottom:20px;margin-left:10px;">
+		<h2><span ng-show="currentUser.name"class="white-text">{{currentUser.name}}</span></h2>
+		<h6><span ng-show="currentUser.name"class="white-text">{{currentUser.post}}</span></h6>
+		<h6><span ng-show="currentUser.name"class="white-text">{{currentUser.role}}</span></h6>
+		<h6><span ng-show="currentUser.name"class="white-text">{{currentUser.email}}</span></h6>
+		</div>
+	</div>
 
+<div class="row container">
+		
+		<div class="col s12 m12 l12">
+			<ul class="tabs black" >
+				<li class="tab col s12 m12 l12"><a class="active white-text" href="#blog">My Blog</a></li>
+				<!--<li class="tab col s4 m4 l4"><a class="white-text" href="#trending">My iPost</a></li>
+				<li class="tab col s4 m4 l4"><a class="white-text" href="#post">My iQuote</a></li>-->
+			</ul>
+			<div class="divider black" style="height:2px;"></div>
+		</div>
+    
+		<!-- New -->    
+		<div id="blog" class="col s12 m12 l12">	
+			<div ng-repeat="blog in blogs | orderBy:'createdOn':true">
+			<div class="row">
+				<div class="col s12 m12 l12">		
+					<div class="col s12 m12 l12 grey lighten-3"><strong style="font-size:50px;">{{blog.title}}</strong><br></div>
+					<div class="col s12 m12 l12 grey lighten-3"><pre>{{blog.body}}</pre></div>
+				</div>
+			
+			<div class="row">
+			 <div class="col s12 m12 l12">
+				<div ng-click="deleteblog(blog.id)"  class="col s4 m2 l2 red-text waves-effect waves-red">delete?</div>
+				<div class="col s12 m12 l12 ">
+					<a ng-click="ilike(blog.id)"class="col s6 m6 l6 center-align grey lighten-4 btn black-text" >					
+					<span>{{blog.likes}} Likes</span>
+					<span style="width:10px;"></span>
+					<span ng-repeat="ibl in ilikes ">											
+					<span ng-show="ibl.blogid==blog.id">
+						<i class="material-icons blue-text">thumb_up</i>					
+					</span>
+					</span>
+					</a>
+				
+					<a href='#/blogDetail/{{blog.id}}' class="col s6 m6 l6 center-align grey lighten-4 btn"><i class="material-icons black-text">comment</i></a>
+				</div>
+			</div>
+			</div>
+			</div>	
+			</div>
+		</div>	
+		
+		<!-- 
+		
+		<div id="trending" class="col s12 m12 l12">Test 2</div>
+		
+		
+		<div id="post" class="col s12 m12 l12">
+
+		</div>
+		-->
+	</div>  
+	
 </body>
 </html>

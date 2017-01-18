@@ -5,9 +5,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	
-	<!-- jquery import -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-	
 	<!-- materialize css and material fonts import -->
 	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
 	<script src="resources/materialize/js/materialize.min.js"/></script>
@@ -66,7 +63,7 @@
 		</div>
 		
 		<div class="row">
-			<div class="col s12 m4 l4 offset-m3 offset-l6"><a id="loginf" class="waves-effect waves-light btn"  type="submit" ng-click="login()"><i class="material-icons left">person</i>Login</a></div>
+			<div class="col s12 m4 l4 offset-m3 offset-l6"><a id="loginf" class="waves-effect waves-light btn"  type="submit" ng-click="login()" onclick="Materialize.toast('logging in', 4000, 'rounded')"><i class="material-icons left">person</i>Login</a></div>
 			<div style="margin-top:10px;" class="col s12 m4 l4 offset-m3 offset-l6"><a href="#/signup" class="white-text">Please Sign-up, if not.</a></div>
 		</div>
 		

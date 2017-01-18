@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	
+	<!-- materialize css and material fonts import -->
+	<link rel="stylesheet" href="resources/materialize/css/materialize.min.css"/> 
+	<script src="resources/materialize/js/materialize.min.js"/></script>
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+body{
+background: #fafafa;}
+
+.tabs .indicator {
+height:5px;
+background-color:white;
+    color: white;
+}
+/*form styles*/
+	/* label color */
+	.input-field label {color: #000;}
+	
+	/* label focus color */
+	.input-field input[type=text]:focus + label {color: #000;}
+	
+	/* label underline focus color */
+	.input-field input[type=text]:focus {border-bottom: 1px solid #000;box-shadow: 0 1px 0 0 #000;}
+	
+	.input-field input[type=password]:focus + label {color: #000;}
+	
+	/* label underline focus color */
+	.input-field input[type=password]:focus {border-bottom: 1px solid #000;box-shadow: 0 1px 0 0 #000;}
+</style>	
+</head>
+<body>
+
+	<div class="row container">
+		
+		<div class="col s12 m12 l12">
+			<ul class="tabs black" >
+				<li class="tab col s4 m4 l4"><a class="active white-text" href="#new">New</a></li>
+				<li class="tab col s4 m4 l4"><a class="white-text" href="#trending">Trending</a></li>
+				<li class="tab col s4 m4 l4"><a class="white-text" href="#post">Post</a></li>
+			</ul>
+			<div class="divider black" style="height:2px;"></div>
+		</div>
+    
+		<!-- New -->    
+		<div id="new" class="col s12 m12 l12">	
+			<div class="white" ng-repeat="blogPost in blogPosts | orderBy:'createdOn':true">
+			<div class="row" style="">
+				<div class="col s12 m12 l12">
+					<img class="circle col s4 m2 l1 responsive-img" style="margin:5px;" ng-show="currentUser.name" src="resources/dp/{{blogPost.createdBy.name}}">			
+					<p style="margin:5px;" class="col s6 m9 l10">{{blogPost.createdBy.name}}<br><small>On: {{blogPost.createdOn | date:'MM/dd/yyyy HH:mm'}}</small></p>			
+					<div class="divider col s12 m12 l12"></div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col s12 m12 l12">		
+					<div class="col s12 m12 l12 "><strong style="font-size:50px;">{{blogPost.title}}</strong><br></div>
+					<div class="col s12 m12 l12"><pre>{{blogPost.body}}</pre></div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col s12 m12 l12 ">
+					<a ng-click="like(blogPost.id)"class="col s6 m6 l6 center-align grey lighten-4 btn black-text" >					
+					<span>{{blogPost.likes}} Likes</span>
+					<span style="width:10px;"></span>
+					<span ng-repeat="bl in bloglikes ">											
+					<span ng-show="bl.blogid==blogPost.id">
+						<i class="material-icons blue-text">thumb_up</i>					
+					</span>
+					</span>
+					</a>
+				
+					<a href='#/blogDetail/{{blogPost.id}}' class="col s6 m6 l6 center-align grey lighten-4 btn"><i class="material-icons black-text">comment</i></a>
+				</div>
+			</div>
+			
+			<div class="row">
+				<form class="col s12 m12 l12"  style="margin:0px;">
+				<div class="input-field col s12 m12 l12">
+					<input class="col s10 m10 l10" id="comment" type="text" class="validate" ng-model="comment.body"  required="required">
+					<label for="comment">Comment</label>
+					<a class="col s2 m2 l2 waves-effect waves-light" ng-click="addComment(blogPost.id)"><i class="material-icons">send</i></a>
+				</div>
+				</form>			
+			</div>
+			</div>
+		</div>	
+		
+		
+		<!-- Trending -->
+		<div id="trending" class="col s12 m12 l12">
+			<div class="white" ng-repeat="blogPost in blogPosts | orderBy:'likes':true">
+			<div class="row" style="">
+				<div class="col s12 m12 l12">
+					<img class="circle col s4 m2 l1 responsive-img" style="margin:5px;" ng-show="currentUser.name" src="resources/dp/{{blogPost.createdBy.name}}">			
+					<p style="margin:5px;" class="col s6 m9 l10">{{blogPost.createdBy.name}}<br><small>On: {{blogPost.createdOn | date:'MM/dd/yyyy HH:mm'}}</small></p>			
+					<div class="divider col s12 m12 l12"></div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col s12 m12 l12">		
+					<div class="col s12 m12 l12 "><strong style="font-size:50px;">{{blogPost.title}}</strong><br></div>
+					<div class="col s12 m12 l12"><pre>{{blogPost.body}}</pre></div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col s12 m12 l12 ">
+					<a ng-click="like(blogPost.id)"class="col s6 m6 l6 center-align grey lighten-4 btn black-text" >					
+					<span>{{blogPost.likes}} Likes</span>
+					<span style="width:10px;"></span>
+					<span ng-repeat="bl in bloglikes ">											
+					<span ng-show="bl.blogid==blogPost.id">
+						<i class="material-icons blue-text">thumb_up</i>					
+					</span>
+					</span>
+					</a>
+				
+					<a href='#/blogDetail/{{blogPost.id}}' class="col s6 m6 l6 center-align grey lighten-4 btn"><i class="material-icons black-text">comment</i></a>
+				</div>
+			</div>
+			
+			<div class="row">
+				<form class="col s12 m12 l12"  style="margin:0px;">
+				<div class="input-field col s12 m12 l12">
+					<input class="col s10 m10 l10" id="comment" type="text" class="validate" ng-model="comment.body"  required="required">
+					<label for="comment">Comment</label>
+					<a class="col s2 m2 l2 waves-effect waves-light" ng-click="addComment(blogPost.id)"><i class="material-icons">send</i></a>
+				</div>
+				</form>			
+			</div>
+			</div>
+		</div>
+		
+		<!-- Post -->
+		<div id="post" class="col s12 m12 l12">
+			<form method="post" class="white">		
+				<div class="row">
+					<div class="input-field col s6 m6 l6 offset-m1 offset-l1">
+						<input id="title" type="text" class="validate" ng-model="blogPost.title"   pattern=".{4,15}" required="required">
+						<label for="tilte">Title</label>
+					</div>
+					<div class="input-field col s12 m10 l10 offset-m1 offset-l1">
+						<textarea style="height:150px;" cols="60"rows="10" id="describe" class="validate" ng-model="blogPost.body"  title="Please enter a valid email" required></textarea>
+						<label for="describe">Describe</label>	
+					</div>
+					<a id="blogpost" style="margin-top:5px;" class="waves-effect waves-light btn input-field col s12 m2 l2 offset-m1 offset-l1"  type="submit" ng-click="postblog()"><i class="material-icons left">person_add</i>Post</a>
+				</div>
+			</form>
+		</div>
+	
+	</div>  
+
+</body>
+</html>
