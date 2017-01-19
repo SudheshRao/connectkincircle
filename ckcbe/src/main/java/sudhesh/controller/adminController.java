@@ -3,6 +3,7 @@ package sudhesh.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import sudhesh.DAO.ConnectDaoImpl;
 import sudhesh.DAO.adminDaoImpl;
 import sudhesh.DAO.kinDAOImpl;
 import sudhesh.model.Badges;
 import sudhesh.model.Kin;
+import sudhesh.model.Notifications;
 
 @Controller
 public class AdminController {
@@ -25,6 +28,8 @@ public class AdminController {
 	private adminDaoImpl admindao;
 	@Autowired
 	private kinDAOImpl kindao;
+	@Autowired
+	private ConnectDaoImpl connectdao;
 	
 	//get kins for access provision
 	@RequestMapping(value="/provideaccess",method=RequestMethod.GET)
@@ -65,6 +70,12 @@ public class AdminController {
 	public  ResponseEntity<?> permit(@RequestBody Kin kin) throws IOException{
 		kin.setStatus(true);
 		kindao.updateaKin(kin);
+		Notifications notify =new Notifications();
+		notify.setFromkin("Admin");
+		notify.setTokin(kin.getName());
+		notify.setNotifiy("Hey!! Welcome to the Family "+kin.getName()+".Now you are able to connect to kin");
+		notify.setTim(Calendar.getInstance().getTime());
+		connectdao.savenotification(notify);
 		return new ResponseEntity<Kin>(HttpStatus.OK);
 	}
 	
@@ -93,6 +104,12 @@ public class AdminController {
 			Kin Kin=kindao.getKinById(id);
 			Kin.setRole("assistadmin");
 			kindao.updateaKin(Kin);
+			Notifications notify =new Notifications();
+			notify.setFromkin("Admin");
+			notify.setTokin(Kin.getName());
+			notify.setNotifiy("Congragulations!! AssistAdmin "+Kin.getName()+".");
+			notify.setTim(Calendar.getInstance().getTime());
+			connectdao.savenotification(notify);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 		
@@ -102,6 +119,12 @@ public class AdminController {
 					Kin Kin=kindao.getKinById(kin.getId());
 					Kin.setRole(kin.getRole());
 					kindao.updateaKin(Kin);
+					Notifications notify =new Notifications();
+					notify.setFromkin("Admin");
+					notify.setTokin(Kin.getName());
+					notify.setNotifiy("Hi "+Kin.getName()+".your role has been changed to "+Kin.getRole());
+					notify.setTim(Calendar.getInstance().getTime());
+					connectdao.savenotification(notify);
 					return new ResponseEntity<Void>(HttpStatus.OK);
 				}
 	//fetch badges

@@ -16,12 +16,14 @@ app.controller('EventController',function($scope,$location,$window,EventService)
 		console.log(id + status);
 		EventService.estatus(id,status)
 		.then(function(response){
-			console.log(response.status);
-			$scope.events;			
-		},function(response){
-			console.log(response.status);
-		})
-	}
+			EventService.getevents()
+			.then(function(response){
+				$scope.events=response.data;
+				EventService.geteventstatus()
+				.then(function(response){
+					$scope.eventstatus=response.data;						
+		})})})}
+	
 	$scope.events=
 		EventService.getevents()
 	.then(function(response){

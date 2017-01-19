@@ -60,13 +60,26 @@ app.config(function($routeProvider) {
 	
 })
 
-	app.run(function($cookieStore,$rootScope,$location,KinService){  
+	app.run(function($cookieStore,$rootScope,$location,KinService,ChatService){  
 		console.log('app.run');
 
 	if($rootScope.currentUser==undefined)
 		$rootScope.currentUser=$cookieStore.get('currentUser')
 		$rootScope.prs=$cookieStore.get('pendingrequest');
 		$rootScope.notify=$cookieStore.get('notifi');
+		
+		$rootScope.messages = [];
+	    $rootScope.message = "";
+	    $rootScope.max = 140;
+	    
+	    $rootScope.addMessage = function() {
+	      ChatService.send($rootScope.currentUser.name + " : " + $rootScope.message);
+	      $rootScope.message = "";
+	    };
+	    
+	    ChatService.receive().then(null, null, function(message) {
+	      $rootScope.messages.push(message);
+	    });
 		$rootScope.logout=function(){
 		console.log('logout function');
 		KinService.logout().then(function(response){

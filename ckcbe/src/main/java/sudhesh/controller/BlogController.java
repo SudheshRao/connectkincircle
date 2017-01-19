@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import sudhesh.DAO.BlogDaoImpl;
+import sudhesh.DAO.ConnectDaoImpl;
 import sudhesh.model.BlogComment;
 import sudhesh.model.BlogPost;
 import sudhesh.model.Bloglikes;
@@ -27,6 +28,9 @@ public class BlogController {
 
 		@Autowired
 		private BlogDaoImpl blogdao;
+		@Autowired
+		private ConnectDaoImpl connectdao;
+		
 		
 		@RequestMapping(value="/blog", method = RequestMethod.POST)
 	    public ResponseEntity<?> addBlog( @RequestBody BlogPost blog,HttpSession session) {

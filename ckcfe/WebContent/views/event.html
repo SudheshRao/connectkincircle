@@ -71,7 +71,7 @@ background: #fafafa;}
 					<span style="width:10px;"></span>
 					<span ng-repeat="es in eventstatus ">											
 					<span ng-show="es.eventid==event.id">
-						<i class="material-icons blue-text">done</i>					
+						<i ng-show="es.attending=='yes'" class="material-icons blue-text">done</i>					
 					</span>
 					</span>
 					</a>
@@ -80,7 +80,7 @@ background: #fafafa;}
 					<span style="width:10px;"></span>
 					<span ng-repeat="es in eventstatus ">											
 					<span ng-show="es.eventid==event.id">
-						<i class="material-icons blue-text">done</i>					
+						<i ng-show="es.attending=='maybe'" class="material-icons blue-text">done</i>					
 					</span>
 					</span>
 					</a>
@@ -89,7 +89,7 @@ background: #fafafa;}
 					<span style="width:10px;"></span>
 					<span ng-repeat="es in eventstatus ">											
 					<span ng-show="es.eventid==event.id">
-						<i class="material-icons blue-text">done</i>					
+						<i ng-show="es.attending=='no'" class="material-icons blue-text">done</i>					
 					</span>
 					</span>
 					</a>

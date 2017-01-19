@@ -45,6 +45,12 @@ public class ConnectController {
 			notify.setNotifiy("You have recieved a connect request from "+kin.getName());
 			notify.setTim(Calendar.getInstance().getTime());
 			connectdao.savenotification(notify);
+			Notifications notifyme =new Notifications();
+			notifyme.setFromkin("CKC");
+			notifyme.setTokin(kin.getName());
+			notifyme.setNotifiy("You have sent Connect request to "+name);
+			notifyme.setTim(Calendar.getInstance().getTime());
+			connectdao.savenotification(notifyme);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 	}
